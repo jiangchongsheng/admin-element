@@ -1,0 +1,89 @@
+/*公共样式*/
+/*layOut样式*/
+.el-row {
+  margin-bottom: 20px;
+&:last-child {
+   margin-bottom: 0;
+ }
+}
+.el-col {
+  border-radius: 4px;
+}
+.grid-content {
+  border-radius: 4px;
+  margin-top: 40px;
+  display: flex;
+}
+/*文字与input样式*/
+.flex{
+  display: flex;
+}
+.roleFont{
+  font-size: 14px;
+  margin-left: 54px;
+  line-height: 40px;
+  margin-right: 20px;
+}
+.roleInput{
+  width:220px;
+}
+.inputWidth{
+  width: 300px;
+}
+.shortwidth{
+  width: 30px;
+}
+.fontWidth{
+  width: 60px;
+}
+.longFontWidth{
+  width: 100px;
+}
+/*button样式*/
+.search{
+  background: #b9ccd2;
+  color: #252b2d;
+  overflow: hidden;
+  z-index: 1;
+  float: left;
+  font-weight: 400;
+  line-height: 45px;
+  margin-right: 2.5em;
+  border-radius:6px;
+  cursor:pointer;
+  overflow: hidden;
+  padding: 0 25px;
+  position: relative;
+  text-align: center;
+  width: auto;
+}
+.search:after {
+  content: "";
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 500%;
+  height: 1000%;
+  background: #cce0e7;
+  z-index: -1;
+  transform-origin: 0% 0%;
+  transform: translateX(calc(20% - 25px)) translateY(10%) rotate(-45deg);
+/transform: translateY(10%) translateX(16%) rotate(-45deg);
+  transition: transform .3s;
+}
+.search:hover::after {
+  transform: translateY(10%) translateX(-25px) rotate(-45deg);
+}
+.el-icon-search:before{
+  margin-right:10px;
+}
+.el-icon-plus:before{
+  margin-right:10px;
+}
+.el-icon-refresh:before{
+  margin-right:10px;
+}
+/*上20*/
+.marginb20 {
+  margin-bottom:20px;
+}
