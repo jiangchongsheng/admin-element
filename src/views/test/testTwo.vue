@@ -1,19 +1,14 @@
 <template>
   <div>
-    <sidentify :identify-code="identifyCode" />
+    <identify identify-code="2222" />
   </div>
 
 </template>
 
 <script>
-import Sidentify from '../../components/components/identify.vue'
 export default {
-  components: {
-    Sidentify
-  },
   data() {
     return {
-      identifyCode: '12345'
     }
   }
 }
