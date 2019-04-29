@@ -12,7 +12,6 @@
 
 本项目基于`webpack4`开发，若还想使用`webpack3`开发，请使用该分支[webpack3](https://github.com/PanJiaChen/vue-admin-template/tree/webpack3)
 
-
 ## Build Setup
 
 ```bash

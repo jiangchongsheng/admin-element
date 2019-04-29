@@ -4,7 +4,6 @@ export default {
     testOne: '菜单一',
     testTwo: '菜单二',
 
-
     oauth: 'oauth管理',
     clientApply: '客户端申请审核',
     clientManagement: '客户端管理',

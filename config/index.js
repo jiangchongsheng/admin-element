@@ -6,20 +6,21 @@ const path = require('path')
 
 module.exports = {
   dev: {
-    // Paths
+    // 静态资源文件夹
     assetsSubDirectory: 'static',
+    // 发布路径
     assetsPublicPath: '/',
     proxyTable: {
       '/': {
-        // 开发环境
-        target: 'http://sit.internal.uc.blackuio.com',
-        changeOrigin: true
+        target: 'http://sit.internal.uc.blackuio.com', // 接口的域名
+        // secure: false,  // 如果是https接口，需要配置这个参数
+        changeOrigin: true // 如果接口跨域，需要进行这个参数配置
       }
     },
 
     // Various Dev Server settings
     host: 'localhost', // can be overwritten by process.env.HOST
-    port: 9527, // can be overwritten by process.env.PORT, if port is in use, a free one will be determined
+    port: 9876, // can be overwritten by process.env.PORT, if port is in use, a free one will be determined
     autoOpenBrowser: true,
     errorOverlay: true,
     notifyOnErrors: false,

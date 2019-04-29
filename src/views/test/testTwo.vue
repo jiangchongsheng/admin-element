@@ -1,7 +1,23 @@
 <template>
-  <div>菜单二</div>
+  <div>
+    <sidentify :identify-code="identifyCode" />
+  </div>
+
 </template>
 
-<style></style>
+<script>
+import Sidentify from '../../components/components/identify.vue'
+export default {
+  components: {
+    Sidentify
+  },
+  data() {
+    return {
+      identifyCode: '12345'
+    }
+  }
+}
 
-<script></script>
+</script>
+
+<style></style>

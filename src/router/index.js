@@ -22,7 +22,11 @@ import Layout from '../views/layout/Layout'
   }
 **/
 export const constantRouterMap = [
-  { path: '/login', component: () => import('@/views/login/index'), hidden: true },
+  {
+    path: '/login',
+    component: () => import('@/views/login/index'),
+    hidden: true
+  },
   { path: '/404', component: () => import('@/views/404'), hidden: true },
 
   {
@@ -31,10 +35,12 @@ export const constantRouterMap = [
     redirect: '/dashboard',
     name: 'Dashboard',
     hidden: true,
-    children: [{
-      path: 'dashboard',
-      component: () => import('@/views/dashboard/index')
-    }]
+    children: [
+      {
+        path: 'dashboard',
+        component: () => import('@/views/dashboard/index')
+      }
+    ]
   },
 
   {
@@ -102,13 +108,15 @@ export const constantRouterMap = [
             children: [
               {
                 path: 'menu1-2-1',
-                component: () => import('@/views/nested/menu1/menu1-2/menu1-2-1'),
+                component: () =>
+                  import('@/views/nested/menu1/menu1-2/menu1-2-1'),
                 name: 'Menu1-2-1',
                 meta: { title: 'menu1-2-1' }
               },
               {
                 path: 'menu1-2-2',
-                component: () => import('@/views/nested/menu1/menu1-2/menu1-2-2'),
+                component: () =>
+                  import('@/views/nested/menu1/menu1-2/menu1-2-2'),
                 name: 'Menu1-2-2',
                 meta: { title: 'menu1-2-2' }
               }
@@ -120,7 +128,6 @@ export const constantRouterMap = [
             name: 'Menu1-3',
             meta: { title: 'menu1-3' }
           }
-
         ]
       },
       {
@@ -144,7 +151,8 @@ export const constantRouterMap = [
         name: 'testOne',
         component: () => import('@/views/test/testOne'),
         meta: { title: 'testOne', icon: 'ku' }
-      }, {
+      },
+      {
         path: 'testTwo',
         name: 'testTwo',
         component: () => import('@/views/test/testTwo'),
