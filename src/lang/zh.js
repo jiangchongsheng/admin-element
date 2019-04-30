@@ -1,6 +1,8 @@
 export default {
   route: {
 
+    Dashboard: '首页',
+
     Example: '例子',
     Table: '表格',
     Tree: '树形图',

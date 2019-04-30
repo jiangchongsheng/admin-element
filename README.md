@@ -2,7 +2,7 @@
 
 > 这是一个 极简的 vue admin 管理后台 它只包含了 Element UI & axios & iconfont & permission control & lint，这些搭建后台必要的东西。
 
-[线上地址](http://panjiachen.github.io/vue-admin-template)
+<!-- [线上地址](http://panjiachen.github.io/vue-admin-template)
 
 [国内访问](https://panjiachen.gitee.io/vue-admin-template)
 
@@ -12,11 +12,11 @@
 
 本项目基于`webpack4`开发，若还想使用`webpack3`开发，请使用该分支[webpack3](https://github.com/PanJiaChen/vue-admin-template/tree/webpack3)
 
-## Build Setup
+## Build Setup -->
 
 ```bash
 # Clone project
-git clone https://github.com/PanJiaChen/vue-admin-template.git
+git clone git@github.com:jiangchongsheng/admin-element.git
 
 # Install dependencies
 npm install
