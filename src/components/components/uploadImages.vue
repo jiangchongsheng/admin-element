@@ -1,38 +1,38 @@
 <template>
   <div class="flex-img">
-    <div 
-v-show="hideShow"
-         style="width:148px;height:148px"
-         class="el-upload-list el-upload-list--picture-card">
-      <div 
-style="width:148px;height:148px"
-           class="el-upload-list__item is-success">
-        <img 
-:src="image"
-             style="width:148px;height:148px"
-             class="flex-img__image">
+    <div
+      v-show="hideShow"
+      style="width:148px;height:148px"
+      class="el-upload-list el-upload-list--picture-card">
+      <div
+        style="width:148px;height:148px"
+        class="el-upload-list__item is-success">
+        <img
+          :src="image"
+          style="width:148px;height:148px"
+          class="flex-img__image">
         <label class="el-upload-list__item-status-label">
           <i class="el-icon-upload-success el-icon-check" />
         </label>
-        <span 
-class="el-upload-list__item-actions"
-              style="width:148px;height:148px">
+        <span
+          class="el-upload-list__item-actions"
+          style="width:148px;height:148px">
           <span class="el-upload-list__item-delete">
-            <i 
-class="el-icon-delete"
-               @click.stop="handleRemove()" />
+            <i
+              class="el-icon-delete"
+              @click.stop="handleRemove()" />
           </span>
         </span>
       </div>
     </div>
-    <el-upload 
-v-show="!hideShow"
-               :action="uploadUrl"
-               :show-file-list="false"
-               :on-success="imageUploadSuccess"
-               :before-upload="beforeUpload"
-               class="image-uploader"
-               accept="image/jpeg,image/jpg,image/png,image/gif">
+    <el-upload
+      v-show="!hideShow"
+      :action="uploadUrl"
+      :show-file-list="false"
+      :on-success="imageUploadSuccess"
+      :before-upload="beforeUpload"
+      class="image-uploader"
+      accept="image/jpeg,image/jpg,image/png,image/gif">
       <i class="el-icon-plus" />
     </el-upload>
     <!-- <div slot="tip" class="el-upload__tip">尺寸宽度不低于640，高度不限制，支持jpg、png格式，1张上限</div> -->

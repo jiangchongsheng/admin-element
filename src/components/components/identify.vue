@@ -1,10 +1,10 @@
 <template>
   <!-- 图片验证码展示 -->
   <div class="s-canvas">
-    <canvas 
-id="s-canvas"
-            :width="contentWidth"
-            :height="contentHeight" />
+    <canvas
+      id="s-canvas"
+      :width="contentWidth"
+      :height="contentHeight" />
   </div>
 </template>
 <script>

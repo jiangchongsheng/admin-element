@@ -8,7 +8,7 @@ import i18n from './lang' // Internationalization
 
 import '@/styles/index.scss' // global css
 
-import CustComponents from './components/components/index'
+import CustComponents from './components/index'
 
 import App from './App'
 import router from './router'
