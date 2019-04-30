@@ -81,12 +81,15 @@ export default {
       this.$refs.loginForm.validate(valid => {
         if (valid) {
           this.loading = true
-          this.$store.dispatch('Login', this.loginForm).then(() => {
-            this.loading = false
-            this.$router.push({ path: '/' })
-          }).catch(() => {
-            this.loading = false
-          })
+          // this.$store.dispatch('Login', this.loginForm).then(() => {
+          //   this.loading = false
+          //   this.$router.push({ path: '/' })
+          // }).catch(() => {
+          //   this.loading = false
+          // })
+
+          // 直接跳转
+          this.$router.push({ path: '/' })
         } else {
           console.log('error submit!!')
           return false

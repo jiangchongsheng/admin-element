@@ -78,6 +78,30 @@ export const constantRouterMap = [
     ]
   },
 
+  // 测试菜单==============
+  {
+    path: '/test',
+    component: Layout,
+    meta: {
+      title: 'test',
+      icon: 'jiaose'
+    },
+    children: [
+      {
+        path: 'testOne',
+        name: 'testOne',
+        component: () => import('@/views/test/testOne'),
+        meta: { title: 'testOne', icon: 'ku' }
+      },
+      {
+        path: 'testTwo',
+        name: 'testTwo',
+        component: () => import('@/views/test/testTwo'),
+        meta: { title: 'testTwo', icon: 'xiao' }
+      }
+    ]
+  },
+
   {
     path: '/nested',
     component: Layout,
@@ -137,71 +161,7 @@ export const constantRouterMap = [
       }
     ]
   },
-  // 测试菜单==============
-  {
-    path: '/test',
-    component: Layout,
-    meta: {
-      title: 'test',
-      icon: 'jiaose'
-    },
-    children: [
-      {
-        path: 'testOne',
-        name: 'testOne',
-        component: () => import('@/views/test/testOne'),
-        meta: { title: 'testOne', icon: 'ku' }
-      },
-      {
-        path: 'testTwo',
-        name: 'testTwo',
-        component: () => import('@/views/test/testTwo'),
-        meta: { title: 'testTwo', icon: 'xiao' }
-      }
-    ]
-  },
 
-  // oauth管理===========
-  {
-    path: '/oauth',
-    component: Layout,
-    redirect: '/oauth/clientManagement',
-    name: 'oauth',
-    meta: {
-      title: 'oauth',
-      icon: 'form'
-    },
-    children: [
-      // 客户端申请审核
-      {
-        path: 'clientApply',
-        component: () => import('@/views/oauth/clientApply'),
-        name: 'clientApply',
-        meta: { title: 'clientApply', icon: 'xiao' }
-      },
-      // 客户端管理
-      {
-        path: 'clientManagement',
-        component: () => import('@/views/oauth/clientManagement'), // Parent router-view
-        name: 'clientManagement',
-        meta: { title: 'clientManagement', icon: 'geren' }
-      },
-      // 用户code管理
-      {
-        path: 'userCode',
-        component: () => import('@/views/oauth/userCode'),
-        name: 'userCode',
-        meta: { title: 'userCode', icon: 'table' }
-      },
-      // 用户AccessToken管理
-      {
-        path: 'userAccessToken',
-        component: () => import('@/views/oauth/userAccessToken'),
-        name: 'userAccessToken',
-        meta: { title: 'userAccessToken', icon: 'id' }
-      }
-    ]
-  },
   { path: '*', redirect: '/404', hidden: true }
 ]
 

@@ -6,7 +6,7 @@
       :current-page="queryData.pageNum"
       :page-sizes="[10, 20, 30, 40]"
       :page-size="queryData.pageRows"
-      :total="Total"
+      :total="total"
       style="margin:20px;float:right"
       background
       layout="total, sizes, prev, pager, next, jumper"
@@ -18,7 +18,7 @@
 export default {
   name: 'Pagination',
   props: {
-    Total: { // 默认总数
+    total: { // 默认总数
       type: Number,
       default: 100
     }
