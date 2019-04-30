@@ -1,6 +1,7 @@
 <template>
   <div>
-    <identify identify-code="2222" />
+    <identify />
+    <upload-images />
   </div>
 
 </template>
