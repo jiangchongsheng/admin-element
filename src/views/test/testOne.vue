@@ -1,6 +1,7 @@
 <template>
   <div>
-    111
+    <identify v-model="aaa"/>
+    <div @click="aaaa">aaa</div>
   </div>
 
 </template>
@@ -9,9 +10,13 @@
 export default {
   data() {
     return {
+      aaa: ''
     }
   },
   methods: {
+    aaaa() {
+      alert(this.aaa)
+    }
   }
 }
 

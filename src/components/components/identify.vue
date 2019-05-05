@@ -1,6 +1,6 @@
 <template>
-  <!-- 图片验证码展示 -->
-  <div class="s-canvas">
+  <!-- 图片验证码展示 0-9 纯数字 4位 -->
+  <div class="s-canvas" @click="changeCode">
     <canvas
       id="s-canvas"
       :width="contentWidth"
@@ -10,11 +10,10 @@
 <script>
 export default {
   name: 'SIdentify',
+  model: {
+    prop: 'identify'
+  },
   props: {
-    identifyCode: { // 默认注册码
-      type: String,
-      default: '1234'
-    },
     fontSizeMin: { // 字体最小值
       type: Number,
       default: 25
@@ -48,15 +47,32 @@ export default {
       default: 38
     }
   },
+  data() {
+    return {
+      identifyCode: '1232'
+    }
+  },
   watch: {
     identifyCode() {
       this.drawPic()
     }
   },
   mounted() {
+    this.changeCode()
     this.drawPic()
   },
   methods: {
+    // 点击事件
+    changeCode() {
+      this.identifyCode = ''
+
+      for (let i = 0; i < 4; i++) {
+        this.identifyCode += this.randomNum(0, 10) // 0 - 9
+      }
+
+      this.$emit('input', this.identifyCode)
+    },
+
     // 生成一个随机数
     randomNum(min, max) {
       return Math.floor(Math.random() * (max - min) + min)
@@ -116,5 +132,7 @@ export default {
       }
     }
   }
+  // 示例
+  // <identify v-model="aaa"/>
 }
 </script>
