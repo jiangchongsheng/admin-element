@@ -78,30 +78,6 @@ export const constantRouterMap = [
     ]
   },
 
-  // 测试菜单==============
-  {
-    path: '/test',
-    component: Layout,
-    meta: {
-      title: 'test',
-      icon: 'jiaose'
-    },
-    children: [
-      {
-        path: 'testOne',
-        name: 'testOne',
-        component: () => import('@/views/test/testOne'),
-        meta: { title: 'testOne', icon: 'ku' }
-      },
-      {
-        path: 'testTwo',
-        name: 'testTwo',
-        component: () => import('@/views/test/testTwo'),
-        meta: { title: 'testTwo', icon: 'xiao' }
-      }
-    ]
-  },
-
   {
     path: '/nested',
     component: Layout,
@@ -160,9 +136,9 @@ export const constantRouterMap = [
         meta: { title: 'menu2' }
       }
     ]
-  },
+  }
 
-  { path: '*', redirect: '/404', hidden: true }
+  // { path: '*', redirect: '/404', hidden: true }
 ]
 
 export default new Router({
@@ -170,3 +146,41 @@ export default new Router({
   scrollBehavior: () => ({ y: 0 }),
   routes: constantRouterMap
 })
+
+// 动态路由
+export const asyncRouterMap = [
+  // 测试菜单==============
+  {
+    path: '/test',
+    component: Layout,
+    meta: {
+      roles: ['admin'], // 角色admin
+      title: 'test',
+      icon: 'jiaose'
+    },
+    children: [
+      {
+        path: 'testOne',
+        name: 'testOne',
+        component: () => import('@/views/test/testOne'),
+        meta: {
+          title: 'testOne',
+          icon: 'ku',
+          roles: ['admin'] // 角色admin
+        }
+      },
+      {
+        path: 'testTwo',
+        name: 'testTwo',
+        component: () => import('@/views/test/testTwo'),
+        meta: {
+          title: 'testTwo',
+          icon: 'xiao',
+          roles: ['admin'] // 角色admin
+        }
+      },
+
+      { path: '*', redirect: '/404', hidden: true }
+    ]
+  }
+]

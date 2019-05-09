@@ -33,7 +33,7 @@ const user = {
       return new Promise((resolve, reject) => {
         login(username, password).then(response => {
           const data = response.data
-          setToken(data.token)
+          setToken(data.token) // 存 token
           commit('SET_TOKEN', data.token)
           resolve()
         }).catch(error => {
@@ -42,7 +42,7 @@ const user = {
       })
     },
 
-    // 获取用户信息
+    // 获取用户信息 (拿到后台给的角色信息)
     GetInfo({ commit, state }) {
       return new Promise((resolve, reject) => {
         getInfo(state.token).then(response => {

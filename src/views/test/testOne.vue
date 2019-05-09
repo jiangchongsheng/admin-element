@@ -2,6 +2,7 @@
   <div>
     <identify v-model="aaa"/>
     <div @click="aaaa">aaa</div>
+    <verification-code/>
   </div>
 
 </template>

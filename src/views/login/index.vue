@@ -38,6 +38,7 @@
 
 <script>
 import { isvalidUsername } from '@/utils/validate'
+import { setToken } from '@/utils/auth'
 
 export default {
   name: 'Login',
@@ -88,7 +89,8 @@ export default {
           //   this.loading = false
           // })
 
-          // 直接跳转
+          // 直接跳转, 存假的token
+          setToken('12312312')
           this.$router.push({ path: '/' })
         } else {
           console.log('error submit!!')
