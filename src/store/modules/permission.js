@@ -49,11 +49,9 @@ const permission = {
     GenerateRoutes({ commit }, data) {
       return new Promise(resolve => {
         const { roles } = data
-        console.log(111)
         let accessedRouters
         // 检查数组是否包含admin
         if (roles.includes('admin')) {
-          console.log('123', asyncRouterMap)
           accessedRouters = asyncRouterMap
         } else {
           accessedRouters = filterAsyncRouter(asyncRouterMap, roles)

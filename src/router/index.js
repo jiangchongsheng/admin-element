@@ -136,23 +136,11 @@ export const constantRouterMap = [
         meta: { title: 'menu2' }
       }
     ]
-  }
-
-  // { path: '*', redirect: '/404', hidden: true }
-]
-
-export default new Router({
-  // mode: 'history', //后端支持可开
-  scrollBehavior: () => ({ y: 0 }),
-  routes: constantRouterMap
-})
-
-// 动态路由
-export const asyncRouterMap = [
-  // 测试菜单==============
+  }, // 测试菜单==============
   {
     path: '/test',
     component: Layout,
+    redirect: 'test/testOne',
     meta: {
       roles: ['admin'], // 角色admin
       title: 'test',
@@ -178,9 +166,23 @@ export const asyncRouterMap = [
           icon: 'xiao',
           roles: ['admin'] // 角色admin
         }
-      },
+      }
 
-      { path: '*', redirect: '/404', hidden: true }
     ]
   }
+
+  // { path: '*', redirect: '/404', hidden: true }
 ]
+
+export default new Router({
+  // mode: 'history', //后端支持可开
+  scrollBehavior: () => ({ y: 0 }),
+  routes: constantRouterMap
+})
+
+// 动态路由
+export const asyncRouterMap = [
+
+  { path: '*', redirect: '/404', hidden: true }
+]
+
