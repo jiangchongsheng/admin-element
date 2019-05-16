@@ -1,9 +1,10 @@
 <template>
   <div>
-    <identify v-model="aaa"/>
-    <div @click="aaaa">aaa</div>
-    <verification-code/>
-    <qr-code/>
+    <identify v-model="aaa" />
+    <verification-code />
+    <qr-code />
+
+    <!-- <ckeditor /> -->
   </div>
 
 </template>
@@ -16,9 +17,7 @@ export default {
     }
   },
   methods: {
-    aaaa() {
-      alert(this.aaa)
-    }
+
   }
 }
 

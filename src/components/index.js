@@ -5,5 +5,6 @@ export default {
     Vue.component('pagination', () => import('./components/pagination.vue')) // 图形验证码
     Vue.component('verification-code', () => import('./components/verificationCode.vue')) // 手机获取验证码
     Vue.component('qr-code', () => import('./components/qrCode.vue')) // 二维码
+    // Vue.component('ckeditor', () => import('./components/CKEditor.vue')) // CKEditor 富文本
   }
 }

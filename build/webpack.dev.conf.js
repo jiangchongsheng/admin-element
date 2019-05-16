@@ -52,13 +52,18 @@ const devWebpackConfig = merge(baseWebpackConfig, {
     }),
     new webpack.HotModuleReplacementPlugin(),
     // https://github.com/ampedandwired/html-webpack-plugin
+    // new HtmlWebpackPlugin({
+    //   filename: 'index.html',
+    //   template: 'index.html',
+    //   inject: true,
+    //   favicon: resolve('favicon.ico'),
+    //   title: 'vue-element-admin'
+    // })
     new HtmlWebpackPlugin({
       filename: 'index.html',
       template: 'index.html',
-      inject: true,
-      favicon: resolve('favicon.ico'),
-      title: 'vue-element-admin'
-    })
+      inject: true
+    }),
   ]
 })
 
