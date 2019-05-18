@@ -1,6 +1,6 @@
 <template>
   <!-- 分页展示 -->
-  <div>
+  <div style="margin-top:20px">
     <slot/>
     <el-pagination
       :current-page="queryData.pageNum"

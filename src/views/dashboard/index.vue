@@ -1,7 +1,8 @@
 <template>
   <div class="dashboard-container">
-    <div class="dashboard-text">name:{{ name }}</div>
-    <div class="dashboard-text">roles:<span v-for="role in roles" :key="role">{{ role }}</span></div>
+    <div class="dashboard-text">姓名：{{ name }}</div>
+    <!-- <div class="dashboard-text">角色：<span v-for="role in roles" :key="role">{{ role }}</span></div> -->
+    <div class="dashboard-text">角色：{{ roleName }}</div>
   </div>
 </template>
 
@@ -10,6 +11,11 @@ import { mapGetters } from 'vuex'
 
 export default {
   name: 'Dashboard',
+  data() {
+    return {
+      roleName: localStorage.getItem('roleName')
+    }
+  },
   computed: {
     ...mapGetters([
       'name',

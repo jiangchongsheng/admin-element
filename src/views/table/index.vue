@@ -1,6 +1,7 @@
 <template>
   <div class="app-container">
-    <div>分页组件</div>
+
+    <div>普通table+分页组件</div>
 
     <pagination :total="100" @get-data="getPageData">
       <el-table

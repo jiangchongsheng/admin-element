@@ -2,9 +2,9 @@ import request from '@/utils/request'
 
 // 用户管理 S
 // 编辑用户信息
-export function updateList(query) {
+export function update(query) {
   return request({
-    url: '/api/user/update',
+    url: '/admin/user/update',
     method: 'post',
     data: query
   })
@@ -13,77 +13,41 @@ export function updateList(query) {
 // 查询所有用户信息
 export function fetchList(query) {
   return request({
-    url: '/api/user/query',
+    url: '/admin/user/getList',
     method: 'post',
     data: query
   })
 }
 
 // 新增用户信息
-export function createUser(query) {
+export function add(query) {
   return request({
-    url: 'api/user/simpleCreate',
+    url: 'admin/user/add',
     method: 'post',
     data: query
   })
 }
 
-// 用户禁用启用状态
-export function openUserStatus(query) {
+export function del(query) {
   return request({
-    url: '/api/user/status/update',
+    url: 'admin/user/delete',
     method: 'post',
     data: query
   })
 }
 
-// 查询用户角色列表
-export function fetchRoleList(query) {
+export function getById(query) {
   return request({
-    url: '/api/user/role/query',
+    url: 'admin/user/getInfoById',
     method: 'post',
     data: query
   })
 }
-// 编辑用户角色
-export function updateRole(query) {
-  return request({
-    url: '/api/user/role/update',
-    method: 'post',
-    data: query
-  })
-}
-// 查询当前用户信息
-export function fetchInfoList(query) {
-  return request({
-    url: '/api/user/info',
-    method: 'post',
-    data: query
-  })
-}
-// 查询所有用户角色
-export function queryAllROle(query) {
-  return request({
-    url: '/userRole/role/all',
-    method: 'post',
-    data: query
-  })
-}
-// 用户管理 E
 
-// 用户实名管理
-// 查询用户实名信息
-export function fetchRealNameList(query) {
+//  用户权限下拉框
+export function queryListRole(query) {
   return request({
-    url: '/userReal/findUserReal',
-    method: 'post',
-    data: query
-  })
-}
-// 查询当前id的状态
-export function getRealStatus(query) {
-  return request({
-    url: '/userReal/status',
+    url: '/admin/role/queryListRole',
     method: 'post',
     data: query
   })

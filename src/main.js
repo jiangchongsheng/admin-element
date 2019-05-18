@@ -13,6 +13,7 @@ import CustComponents from './components/index'
 import App from './App'
 import router from './router'
 import store from './store'
+import moment from 'moment'
 
 import '@/icons' // icon
 import '@/permission' // permission control
@@ -22,6 +23,15 @@ Vue.use(ElementUI, { i18n: (key, value) => i18n.t(key, value) })
 Vue.use(CustComponents)
 
 Vue.config.productionTip = false
+
+// 过滤器 时间戳
+Vue.filter('dateformat', function(dataStr, pattern = 'YYYY-MM-DD') {
+  if (dataStr) {
+    return moment(dataStr).format(pattern)
+  } else {
+    return dataStr
+  }
+})
 
 new Vue({
   el: '#app',

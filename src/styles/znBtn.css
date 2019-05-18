@@ -1,0 +1,366 @@
+/* 公共样式 Start*/
+
+  /* 弹性盒子样式 */
+.flex{
+  display: flex;
+}
+
+  /* 字体样式 Start */
+.fontSize12{
+  font-size: 12px;
+}
+.fontSize14{
+  font-size:14px;
+}
+  /* 颜色样式 Start*/
+.colorBlack{
+  color: rgba(96, 98, 102, 1)
+}
+.colorRed{
+  color:red;
+}
+.colorBlue{
+  color:blue;
+}
+  /* 宽度样式 */
+.inputWidth{
+  width:220px;
+}
+.inputWidthstyle{
+  width:280px;
+}
+.titleWidth{
+  width:300px;
+}
+.formWidth{
+  width:400px;
+}
+.marginTop{
+  margin-top:20px;
+}
+marginRight{
+  margin-right:20px;
+}
+.marginBottom{
+  margin-bottom:20px;
+}
+.marginLeft{
+  margin-left: 20px;
+}
+.marginLeft80{
+  margin-left: 80px;
+}
+/* 按钮样式 */
+.style-btn {
+  width: 90px;
+  height: 40px;
+  padding-left: 18px;
+}
+.pan-btn1{
+  width:60px;
+  height:26px;
+  padding:2px 6px;
+  font-size: 12px;
+  margin:0px 0px;
+}
+.pan-btn2{
+  width:90px;
+  height:26px;
+  padding:2px 6px;
+  font-size: 12px;
+  margin:0px 0px;
+}
+.pan-btn3{
+  width: 90px;
+  height: 30px;
+  padding:2px 6px;
+  font-size: 12px;
+  margin:0px 0px;
+}
+/* 公共样式 End*/
+
+/* 会议管理————会议预约样式 */
+.navInput1 {
+  width: 250px;
+  height: 30px;
+  margin-top: 6px;
+  cursor: pointer;
+}
+.warn {
+  display: inline-block;
+  font-size: 12px;
+  color: red;
+}
+.titleStyle {
+  font-size: 14px;
+  width: 150px;
+  text-align: right;
+  margin-right: 20px;
+  display: inline-block;
+}
+
+.startBtn{
+  width:120px;
+  height: 40px;
+  padding-left: 20px;
+}
+.testStyle {
+  width: 220px;
+}
+.tips {
+  line-height: 30px;
+  margin-left: 5px;
+}
+.deviceControl {
+  display: inline-block;
+  vertical-align: top;
+  margin-top: -6px;
+}
+.deviceContro2 {
+  margin-top: 4px;
+}
+/* 会议管理————即时会议 */
+.btn_jishi {
+  margin: 20px 20px 0 40px;
+  width: 140px;
+  height: 40px;
+  padding-left: 16px;
+}
+.marginBottom{
+ margin-bottom:10px;
+}
+.inline {
+  display: inline-block;
+}
+/* 会议管理————会议历史纪录 */
+.btn_query {
+  margin: 20px 20px 0 170px;
+  width:90px;
+  height:40px;
+  padding-left: 18px;
+}
+
+
+/* 个人信息管理————个人信息 */
+  /* 上传头像样式 */
+.avatar-uploader .el-upload {
+  border: 1px dashed #d9d9d9;
+  border-radius: 6px;
+  cursor: pointer;
+  position: relative;
+  overflow: hidden;
+}
+
+.avatar-uploader .el-upload:hover {
+  border-color: #409EFF;
+}
+
+.avatar-uploader-icon {
+  font-size: 28px;
+  color: #8c939d;
+  width: 178px;
+  height: 178px;
+  line-height: 178px;
+  text-align: center;
+}
+.container{
+  margin-top:30px;
+}
+.avatar {
+  width: 178px;
+  height: 178px;
+  display: block;
+}
+
+/* 派工计划样式 */
+.beCareful {
+  color: red;
+  display: inline-block;
+  vertical-align: -webkit-baseline-middle;
+  vertical-align: -moz-middle-with-baseline;
+}
+/* 设备管理————设备信息 */
+.refreshBtn{
+  width:60px;
+  height:26px;
+  padding:2px 6px;
+  font-size: 12px;
+  margin:0px 26px;
+}
+/* 设备管理————设备状态 */
+.choose {
+  display: flex;
+  width: 100%;
+  height: 50px;
+  line-height: 50px;
+  padding-left: 50px;
+  font-size: 14px;
+}
+
+.buttons {
+  display: flex;
+  padding-left: 140px;
+  margin-top: 20px;
+}
+/* 直播管理 */
+
+.tab2Title {
+  margin-top: 15px;
+  margin-left: 40px;
+}
+/* 报警监控————报警联系人配置 */
+.linkInput{
+  height: 30px;
+  margin-left: 20px;
+}
+.connection{
+  margin-left: 50px;
+  line-height: 20px;
+}
+/* 报警监控————电量报警阈值 */
+.text_inner{
+  width: 196px;
+  height: 30px;
+  margin-left: 20px;
+}
+/* 企业管理 */
+.addBtn{
+  margin-bottom: 10px;
+}
+.pagination-container{
+  margin-left: 20px;
+  margin-top: 20px;
+}
+.nav {
+  width: 100%;
+  height: 51px;
+  display: flex;
+  border: none;
+}
+.nav_user {
+  width: 1300px;
+  height: 51px;
+  display: flex;
+  border: none;
+  margin-top: 10px;
+}
+.staffName_user{
+  width: 120px;
+  height: 26px;
+  line-height: 51px;
+  text-align: right;
+  font-size: 14px;
+  color: #606266;
+  font-weight: bold;
+}
+.staffName {
+  width: 91px;
+  height: 26px;
+  line-height: 51px;
+  margin-left: 20px;
+  font-size: 14px;
+  color: #606266;
+  font-weight: bold;
+}
+.navInput {
+  width: 200px;
+  height: 30px;
+  line-height: 30px;
+  margin-top: 6px;
+  cursor: pointer;
+}
+.navAdd {
+  width: 100%;
+  height: 51px;
+  display: flex;
+}
+.Add_detail {
+  width: 80px;
+  height: 20px;
+  text-align: center;
+  line-height: 20px;
+  color: #101010;
+  border-left: 4px solid #101010;
+  margin-top: 15px;
+  margin-left: 5px;
+  font-family: Roboto;
+  font-weight: bold;
+}
+.addBtn{
+  margin-left: 10px;
+}
+.query {
+  /* width: 90px; */
+  height: 40px;
+  /* padding-left:18px; */
+  margin-left: 10px;
+  margin-top: 6px;
+}
+.updateTitle {
+  display: inline-block;
+  width: 110px;
+  font-family: Roboto;
+  color: rgba(16, 16, 16, 1);
+  font-size: 14px;
+  text-align: right;
+}
+.find{
+  width:90px;
+  height:40px;
+  margin-left: 10px;
+  margin-top:5px;
+  padding-left:18px;
+}
+
+/* 2.0报修 */
+.Disf{
+  display:flex;
+}
+.img1 {
+  width:150px;
+  height:150px;
+}
+
+/* 2.0 测试企业 */
+.txtStyle {
+  width:100px;
+  margin-right: 10px;
+}
+.txtStyle1{
+  width:60px;
+  margin-right: 10px;
+}
+.Xcenter {
+  display: inline-block;
+  vertical-align: middle
+}
+.Jurisdiction {
+  width:590px;
+  border: 1px solid #cccccc;
+  margin:10px 0  20px 14px;
+  border-radius: 5px;
+  padding:10px;
+}
+.Jurisdiction>div{
+  width:450px;
+  /* border:1px solid red; */
+  margin-left:40px;
+}
+.JurisdictionD{
+  width:120px;
+}
+
+/* 会议号 */
+.meetNumStyle{
+  width:178px;
+  margin-left: 6px;
+}
+
+.inputwidth {
+  width: 200px
+}
+.el-tabs--border-card{
+  border:none !important;
+  -webkit-box-shadow:none !important;
+  box-shadow:none !important;
+}

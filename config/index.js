@@ -6,15 +6,16 @@ const path = require('path')
 
 module.exports = {
   dev: {
-    // 静态资源文件夹
+    // Paths
     assetsSubDirectory: 'static',
-    // 发布路径
     assetsPublicPath: '/',
     proxyTable: {
       '/': {
-        target: 'http://10.40.143.147:8088', // 接口的域名
-        // secure: false,  // 如果是https接口，需要配置这个参数
-        changeOrigin: true // 如果接口跨域，需要进行这个参数配置
+        // 开发环境
+        target: 'http://10.10.1.73:8080',
+        // target: 'http://10.10.1.237:8080',//宋建超
+        // target: 'http://10.10.1.111:8080',//刘成
+        changeOrigin: true
       }
     },
 

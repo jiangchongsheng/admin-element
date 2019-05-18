@@ -50,7 +50,6 @@ const permission = {
       return new Promise(resolve => {
         const { roles } = data
         let accessedRouters
-        // 检查数组是否包含admin
         if (roles.includes('admin')) {
           accessedRouters = asyncRouterMap
         } else {

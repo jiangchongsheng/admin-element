@@ -27,37 +27,64 @@ const user = {
   actions: {
     // 登录
     Login({ commit }, userInfo) {
-      console.log(userInfo)
       const username = userInfo.username.trim()
-      const password = userInfo.password.trim()
       return new Promise((resolve, reject) => {
-        login(username, password).then(response => {
-          const data = response.data
-          setToken(data.token) // 存 token
-          commit('SET_TOKEN', data.token)
-          resolve()
+        login(username, userInfo.password).then(response => {
+          const data = response
+          if (data.code !== '0000') {
+            reject(data.msg)
+          } else {
+            commit('SET_TOKEN', data.data)
+            setToken(data.data)
+            resolve()
+          }
         }).catch(error => {
           reject(error)
         })
       })
     },
 
-    // 获取用户信息 (拿到后台给的角色信息)
+    // 获取用户信息
     GetInfo({ commit, state }) {
       return new Promise((resolve, reject) => {
-        getInfo(state.token).then(response => {
-          const data = response.data
-          if (data.roles && data.roles.length > 0) { // 验证返回的roles是否是一个非空数组
-            commit('SET_ROLES', data.roles)
-          } else {
-            reject('getInfo: roles must be a non-null array !')
-          }
-          commit('SET_NAME', data.name)
-          commit('SET_AVATAR', data.avatar)
-          resolve(response)
-        }).catch(error => {
-          reject(error)
-        })
+        // 假值============ 默认给权限 admin==============
+        const arr = ['admin']
+        commit('SET_ROLES', arr)
+        resolve(arr)
+        // 假值============ 默认给权限 admin==============
+
+        // getInfo(state.token).then(response => {
+        //   console.log(response)
+        //   const data = response.data
+        //   localStorage.setItem('userId', data.userId)
+        //   localStorage.setItem('roleName', data.roleName)
+        //   // switch (data.role) {
+        //   //   case 0:
+        //   //     commit('SET_ROLES', ['admin'])
+        //   //     break
+        //   //   case 1:
+        //   //     commit('SET_ROLES', ['input'])
+        //   //     break
+        //   //   case 2:
+        //   //     commit('SET_ROLES', ['manage'])
+        //   //     break
+        //   //   case 3:
+        //   //     commit('SET_ROLES', ['base'])
+        //   //     break
+        //   //   case 4:
+        //   //     commit('SET_ROLES', ['detail'])
+        //   //     break
+        //   //   case 5:
+        //   //     commit('SET_ROLES', ['none'])
+        //   //     break
+        //   // }
+        //   commit('SET_ROLES', data.permissions)
+        //   commit('SET_NAME', data.name)
+        //   commit('SET_AVATAR', data.avatar)
+        //   resolve(response)
+        // }).catch(error => {
+        //   reject(error)
+        // })
       })
     },
 

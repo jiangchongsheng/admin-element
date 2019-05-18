@@ -30,3 +30,33 @@ export function validatAlphabets(str) {
   const reg = /^[A-Za-z]+$/
   return reg.test(str)
 }
+
+// 只能输入数字
+export function isNumber(str) {
+  const reg = /^[0-9]*$/
+  return reg.test(str)
+}
+
+// 手机号验证
+export function isvalidPhone(str) {
+  const reg = /^1[2|3|4|5|6|7|8|9][0-9]\d{8}$/
+  return reg.test(str)
+}
+
+// 非空验证（ 不能有空格)
+export function isHave(str) {
+  const reg = /^\S+$/
+  return reg.test(str)
+}
+
+// 身份证验证
+export function identity(str) {
+  const reg = /^[1-9]\d{7}((0\d)|(1[0-2]))(([0|1|2]\d)|3[0-1])\d{3}$|^[1-9]\d{5}[1-9]\d{3}((0\d)|(1[0-2]))(([0|1|2]\d)|3[0-1])\d{3}([0-9]|X)$/
+  return reg.test(str)
+}
+
+// 只能汉字（繁简）+ 字母
+export function isChineseE(str) {
+  const reg = /^[a-zA-Z\u4e00-\u9fa5]+$/
+  return reg.test(str)
+}

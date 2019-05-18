@@ -1,4 +1,7 @@
 /*公共样式*/
+/* .dateWidth {
+  width:300px;
+} */
 /*layOut样式*/
 .el-row {
   margin-bottom: 20px;
@@ -11,7 +14,6 @@
 }
 .grid-content {
   border-radius: 4px;
-  margin-top: 40px;
   display: flex;
 }
 /*文字与input样式*/
@@ -24,6 +26,20 @@
   line-height: 40px;
   margin-right: 20px;
 }
+.title{
+  width: 130px;
+  border:1px solid red;
+  text-align: right;
+  color:grey;
+  font-size: 14px;
+  margin-left: 80px;
+  line-height: 40px;
+}
+.info{
+  color:black;
+  margin-left: 20px;
+  line-height: 40px;
+}
 .roleInput{
   width:220px;
 }
@@ -34,7 +50,10 @@
   width: 30px;
 }
 .fontWidth{
-  width: 60px;
+  width: 90px;
+}
+.BLfontWidth{
+  width:120px;
 }
 .longFontWidth{
   width: 100px;
@@ -77,13 +96,25 @@
 .el-icon-search:before{
   margin-right:10px;
 }
-.el-icon-plus:before{
-  margin-right:10px;
-}
 .el-icon-refresh:before{
   margin-right:10px;
 }
 /*上20*/
 .marginb20 {
   margin-bottom:20px;
+}
+.marginLeft{
+  margin-left:100px;
+}
+/* 用户管理按钮样式 */
+.btnSty{
+  margin:50px 20px 20px 54px;
+}
+.business{
+  cursor: pointer;
+}
+.business:hover{
+  color:skyblue;
+  font-size:18px;
+  transition: 1s;
 }
