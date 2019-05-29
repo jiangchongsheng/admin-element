@@ -1,12 +1,15 @@
 'use strict'
-require('./check-versions')()
+require('./check-versions')()  // 检查 Node 和 npm 版本
 
 process.env.NODE_ENV = 'production'
 
+// 一个可以强制打开浏览器并跳转到指定 url 的插件
 const ora = require('ora')
 const rm = require('rimraf')
+// 使用 NodeJS 自带的文件路径工具
 const path = require('path')
 const chalk = require('chalk')
+// 使用 webpack
 const webpack = require('webpack')
 const config = require('../config')
 const webpackConfig = require('./webpack.test.conf')

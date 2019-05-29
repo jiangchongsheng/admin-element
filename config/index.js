@@ -6,9 +6,11 @@ const path = require('path')
 
 module.exports = {
   dev: {
-    // Paths
+    // Paths // 编译输出的二级目录
     assetsSubDirectory: 'static',
+    // 编译发布上线路径的根目录，可配置为资源服务器域名或 CDN 域名
     assetsPublicPath: '/',
+    // 需要 proxyTable 代理的接口（可跨域）
     proxyTable: {
       '/': {
         // 开发环境
@@ -21,8 +23,10 @@ module.exports = {
 
     // Various Dev Server settings
     host: 'localhost', // can be overwritten by process.env.HOST
+     // 运行测试页面的端口
     port: 9876, // can be overwritten by process.env.PORT, if port is in use, a free one will be determined
-    autoOpenBrowser: true,
+    // 是否自动打开浏览器
+    autoOpenBrowser: true, 
     errorOverlay: true,
     notifyOnErrors: false,
     poll: false, // https://webpack.js.org/configuration/dev-server/#devserver-watchoptions-
@@ -47,15 +51,19 @@ module.exports = {
     // (https://github.com/webpack/css-loader#sourcemaps)
     // In our experience, they generally work as expected,
     // just be aware of this issue when enabling this option.
+     // 是否开启 cssSourceMap
     cssSourceMap: false
   },
 
+  // production 环境
   build: {
     // Template for index.html
     index: path.resolve(__dirname, '../dist/index.html'),
 
-    // Paths
+    // Paths // 编译输出的静态资源根路径
     assetsRoot: path.resolve(__dirname, '../dist'),
+
+     // 编译输出的二级目录
     assetsSubDirectory: 'static',
 
     /**
@@ -65,12 +73,14 @@ module.exports = {
      * then assetsPublicPath should be set to "/bar/".
      * In most cases please use '/' !!!
      */
+    // 编译发布上线路径的根目录，可配置为资源服务器域名或 CDN 域名
     assetsPublicPath: '/',
 
     /**
      * Source Maps
      */
-
+    
+     // 是否开启 cssSourceMap
     productionSourceMap: false,
     // https://webpack.js.org/configuration/devtool/#production
     devtool: 'source-map',
@@ -79,13 +89,21 @@ module.exports = {
     // Surge or Netlify already gzip all static assets for you.
     // Before setting to `true`, make sure to:
     // npm install --save-dev compression-webpack-plugin
+
+     // 是否开启 gzip
     productionGzip: false,
+    // 需要使用 gzip 压缩的文件扩展名
     productionGzipExtensions: ['js', 'css'],
 
     // Run the build command with an extra argument to
     // View the bundle analyzer report after build finishes:
     // `npm run build --report`
     // Set to `true` or `false` to always turn it on or off
+
+    // 插件叫做bundleAnalyzerReport，上面有几行注释，讲的是只要在打包的时候输入
+    // npm run build --report,就可以在打包的同时查看每个打包生成的js，
+    // 里面的库的构成情况，方便我们进行相关的删减，比如有的库太大了，
+    // 是否可以自己实现，有的库是否有必要，可否删除之类
     bundleAnalyzerReport: process.env.npm_config_report || false,
 
     // `npm run build:prod --generate_report`

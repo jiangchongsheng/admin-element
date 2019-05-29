@@ -3,10 +3,14 @@ const path = require('path')
 const utils = require('./utils')
 const webpack = require('webpack')
 const config = require('../config')
+// 加载 webpack 配置合并工具
 const merge = require('webpack-merge')
+// 加载 webpack.base.conf.js文件
 const baseWebpackConfig = require('./webpack.base.conf')
 const CopyWebpackPlugin = require('copy-webpack-plugin')
+// 一个可以插入 html 并且创建新的 .html 文件的插件
 const HtmlWebpackPlugin = require('html-webpack-plugin')
+
 const ScriptExtHtmlWebpackPlugin = require('script-ext-html-webpack-plugin')
 const MiniCssExtractPlugin = require('mini-css-extract-plugin')
 const OptimizeCSSAssetsPlugin = require('optimize-css-assets-webpack-plugin')
@@ -22,9 +26,11 @@ const env = require('../config/prod.env')
 const seen = new Set()
 const nameLength = 4
 
+// 合并 webpack.base.conf.js
 const webpackConfig = merge(baseWebpackConfig, {
   mode: 'production',
   module: {
+    // 使用的 loader
     rules: utils.styleLoaders({
       sourceMap: config.build.productionSourceMap,
       extract: true,
@@ -33,16 +39,22 @@ const webpackConfig = merge(baseWebpackConfig, {
   },
   devtool: config.build.productionSourceMap ? config.build.devtool : false,
   output: {
+    // 编译输出目录
     path: config.build.assetsRoot,
+    // 编译输出文件名
+    // 我们可以在 hash 后加 :6 决定使用几位 hash 值
     filename: utils.assetsPath('js/[name].[chunkhash:8].js'),
+    // 没有指定输出名的文件输出的文件名
     chunkFilename: utils.assetsPath('js/[name].[chunkhash:8].js')
   },
   plugins: [
     // http://vuejs.github.io/vue-loader/en/workflow/production.html
+    // definePlugin 接收字符串插入到代码当中, 所以你需要的话可以写上 JS 的字符串
     new webpack.DefinePlugin({
       'process.env': env
     }),
     // extract css into its own file
+      // 将 css 文件分离出来
     new MiniCssExtractPlugin({
       filename: utils.assetsPath('css/[name].[contenthash:8].css'),
       chunkFilename: utils.assetsPath('css/[name].[contenthash:8].css')
@@ -50,12 +62,16 @@ const webpackConfig = merge(baseWebpackConfig, {
     // generate dist index.html with correct asset hash for caching.
     // you can customize output by editing /index.html
     // see https://github.com/ampedandwired/html-webpack-plugin
+
+    // 输入输出的 .html 文件
     new HtmlWebpackPlugin({
       filename: config.build.index,
       template: 'index.html',
+      // 是否注入 html
       inject: true,
       favicon: resolve('favicon.ico'),
       title: 'vue-element-admin',
+      // 压缩的方式
       minify: {
         removeComments: true,
         collapseWhitespace: true,

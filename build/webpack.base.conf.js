@@ -3,8 +3,10 @@ const path = require('path')
 const utils = require('./utils')
 const config = require('../config')
 const { VueLoaderPlugin } = require('vue-loader')
+// .vue 文件配置 loader 及工具 (autoprefixer)
 const vueLoaderConfig = require('./vue-loader.conf')
 
+// 拼接我们的工作区路径为一个绝对路径的函数
 function resolve(dir) {
   return path.join(__dirname, '..', dir)
 }
@@ -20,27 +22,34 @@ const createLintingRule = () => ({
   }
 })
 
+// webpack 配置，输入、输出、模块、插件
 module.exports = {
   context: path.resolve(__dirname, '../'),
   entry: {
     app: './src/main.js'
   },
   output: {
+     // 编译输出的根路径
     path: config.build.assetsRoot,
+    // 编译输出的文件名
     filename: '[name].js',
+    // 正式发布环境下编译输出的发布路径
     publicPath:
       process.env.NODE_ENV === 'production'
         ? config.build.assetsPublicPath
         : config.dev.assetsPublicPath
   },
   resolve: {
+    // 自动补全的扩展名
     extensions: ['.js', '.vue', '.json'],
+    // 默认路径代理，即起别名，例如 import Vue from 'vue'，会自动到 'vue/dist/vue.common.js'中寻
     alias: {
       '@': resolve('src')
     }
   },
   module: {
     rules: [
+      // 需要处理的文件及使用的 loader
       ...(config.dev.useEslint ? [createLintingRule()] : []),
       {
         test: /\.vue$/,

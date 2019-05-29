@@ -1,22 +1,30 @@
 'use strict'
 require('./check-versions')()
 
+// 当node无法判断是本地还是线上时，这里默认写上线上
 process.env.NODE_ENV = 'production'
 
+// 一个很好看的 loading 插件
 const ora = require('ora')
 const rm = require('rimraf')
 const path = require('path')
 const chalk = require('chalk')
 const webpack = require('webpack')
 const config = require('../config')
-const webpackConfig = require('./webpack.prod.conf')
 
+// 加载 webpack.prod.conf文件
+const webpackConfig = require('./webpack.prod.conf')
+// 使用 ora 打印出 loading + log
 const spinner = ora('building for production...')
+// 开始 loading 动画
 spinner.start()
 
+// 删除打包后的文件夹，重新生成打包后的文件
 rm(path.join(config.build.assetsRoot, config.build.assetsSubDirectory), err => {
   if (err) throw err
+   //  开始 webpack 的编译
   webpack(webpackConfig, (err, stats) => {
+    // 编译成功的回调函数
     spinner.stop()
     if (err) throw err
     process.stdout.write(
