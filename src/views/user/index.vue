@@ -60,6 +60,7 @@
         </el-form-item>
 
         <el-form-item label="角色设置">
+
           <div v-for="(item,group) in originData" :key="group">
             <el-checkbox
               :indeterminate="addList.permissionData[group].isIndeterminate"
@@ -116,10 +117,12 @@ export default {
         employee: {
           checkAll: false,
           isIndeterminate: false
-        }, user: {
+        },
+        user: {
           checkAll: false,
           isIndeterminate: false
-        }, role: {
+        },
+        role: {
           checkAll: false,
           isIndeterminate: false
         }
@@ -231,12 +234,12 @@ export default {
     },
     // 弹出框关闭
     dialogClose() {
-    //   console.log('closed')
-    //   this.$refs['addList'].resetFields()
-    //   this.addList.roleName = ''
-    //   this.addList['id'] = ''
-    //   this.addList.permissions = JSON.parse(JSON.stringify(this.permissions))
-    //   this.addList.permissionData = JSON.parse(JSON.stringify(this.permissionData))
+      console.log('closed')
+      this.$refs['addList'].resetFields()
+      this.addList.roleName = ''
+      this.addList['id'] = ''
+      this.addList.permissions = JSON.parse(JSON.stringify(this.permissions))
+      this.addList.permissionData = JSON.parse(JSON.stringify(this.permissionData))
     },
     handleCheckAllChange(val, ev) {
       var group = (ev.target || ev.srcElement).getAttribute('name')
@@ -285,10 +288,6 @@ export default {
       })
     }
 
-    // 员工导入
-    // importAnAccount() {
-
-    // }
   }
 }
 </script>

@@ -6,5 +6,6 @@ export default {
     Vue.component('verification-code', () => import('./components/verificationCode.vue')) // 手机获取验证码
     Vue.component('qr-code', () => import('./components/qrCode.vue')) // 二维码
     // Vue.component('ckeditor', () => import('./components/CKEditor.vue')) // CKEditor 富文本
+    Vue.component('my-chart-china', () => import('./components/myChartChina.vue')) // echarts 中国地图
   }
 }
