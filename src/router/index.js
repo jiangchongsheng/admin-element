@@ -96,6 +96,30 @@ export const asyncRouterMap = [
     ]
   },
 
+  // 图表控件
+  {
+    path: '/chart',
+    component: Layout,
+    redirect: 'chart/index',
+    meta: {
+      roles: ['admin'],
+      title: 'chart',
+      icon: 'tree'
+    },
+    children: [
+      {
+        path: 'chart',
+        component: () => import('@/views/chart/index'),
+        name: 'index',
+        meta: {
+          roles: ['admin'],
+          title: 'chart',
+          icon: 'tree'
+        }
+      }
+    ]
+  },
+
   // 测试菜单==============
   {
     path: '/test',
