@@ -7,7 +7,7 @@
       :page-sizes="[10, 20, 30, 40]"
       :page-size="queryData.pageRows"
       :total="total"
-      style="margin:20px;float:right"
+      style="margin:20px;text-align:right"
       background
       layout="total, sizes, prev, pager, next, jumper"
       @size-change="handleSizeChange"

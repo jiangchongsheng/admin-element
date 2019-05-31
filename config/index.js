@@ -57,13 +57,17 @@ module.exports = {
 
   // production 环境
   build: {
-    // Template for index.html
+    // index,assetsRoot两个路径基本不用改动，只是用于文件打包存放的路径
+    // index.html的路径
     index: path.resolve(__dirname, '../dist/index.html'),
-
+    // js,css,fonts夹等资源的路径
     // Paths // 编译输出的静态资源根路径
     assetsRoot: path.resolve(__dirname, '../dist'),
 
-     // 编译输出的二级目录
+    // 编译输出的二级目录
+    // 下面这种写法指定静态文件 js/css夹等与index平级
+    // 指定为'/' 会打包会出现错误，最高只能指定到当前目录’./'  指定目录不存在会自动创建
+    // 也就是说js,css文件夹的路径其实是上面的: ’../dist' + assetsSubDirectory
     assetsSubDirectory: 'static',
 
     /**
@@ -74,7 +78,9 @@ module.exports = {
      * In most cases please use '/' !!!
      */
     // 编译发布上线路径的根目录，可配置为资源服务器域名或 CDN 域名
-    assetsPublicPath: '/',
+    // index.html中引用资源的前缀
+    // 相当于static/js/app.js的前缀 eg： ./static/js...     /static/js.....
+    assetsPublicPath: './',
 
     /**
      * Source Maps
