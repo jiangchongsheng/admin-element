@@ -46,6 +46,7 @@ const permission = {
     }
   },
   actions: {
+    // 生成可访问的路由
     GenerateRoutes({ commit }, data) {
       return new Promise(resolve => {
         const { roles } = data

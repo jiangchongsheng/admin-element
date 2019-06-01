@@ -6,9 +6,11 @@ const { VueLoaderPlugin } = require('vue-loader')
 // .vue 文件配置 loader 及工具 (autoprefixer)
 const vueLoaderConfig = require('./vue-loader.conf')
 
-// 拼接我们的工作区路径为一个绝对路径的函数
+// 方便对import时引入地址的方便填写 拼接我们的工作区路径为一个绝对路径的函数
 function resolve(dir) {
   return path.join(__dirname, '..', dir)
+  // 此时__dirname是build文件路径..代表再出去一层，就是文件的根路径，
+  // 那dir这个参数则是你要传的文件夹，如果我们传src的话就是从src目录开始找
 }
 
 const createLintingRule = () => ({
@@ -24,14 +26,16 @@ const createLintingRule = () => ({
 
 // webpack 配置，输入、输出、模块、插件
 module.exports = {
+  // 运行环境的上下文，就是实际的目录
   context: path.resolve(__dirname, '../'),
   entry: {
-    app: './src/main.js'
+    app: './src/main.js'  // 编译入口js文件
   },
+  // 输出内容，这内部的配置会根据不同的运行环境来进行变化
   output: {
-     // 编译输出的根路径
+    // 编译输出的根路径
     path: config.build.assetsRoot,
-    // 编译输出的文件名
+    // 编译输出的文件名 name对应编译入口配置的key,也就是上面的app
     filename: '[name].js',
     // 正式发布环境下编译输出的发布路径
     publicPath:
@@ -47,6 +51,8 @@ module.exports = {
       '@': resolve('src')
     }
   },
+  // module配置一些eslint、vue、js、图片资源、字体图标、文件等加载的loader。
+  // 安装项目依赖包之后，一般都要检查rules里面是否有对应的loader配置
   module: {
     rules: [
       // 需要处理的文件及使用的 loader

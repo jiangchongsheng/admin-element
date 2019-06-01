@@ -1,4 +1,5 @@
-import { login, logout, getInfo } from '@/api/login'
+// import { login, logout, getInfo } from '@/api/login'
+import { login, logout } from '@/api/login'
 import { getToken, setToken, removeToken } from '@/utils/auth'
 
 const user = {
@@ -31,7 +32,7 @@ const user = {
       return new Promise((resolve, reject) => {
         login(username, userInfo.password).then(response => {
           const data = response
-          if (data.code !== '0000') {
+          if (data.code !== '0000') { // 不等于失败状态
             reject(data.msg)
           } else {
             commit('SET_TOKEN', data.data)
