@@ -42,6 +42,10 @@ export default {
   },
   methods: {
 
+    randomValue() {
+      return Math.round(Math.random() * 1000)
+    },
+
     drawLine() {
       const myChart = echarts.init(document.getElementById(this.chartObj.id)) // 这里是为了获得容器所在位置
       window.onresize = myChart.resize
@@ -62,8 +66,8 @@ export default {
         tooltip: {}, // 鼠标移到图里面的浮动提示框
         dataRange: {
           show: false, // 组件
-          min: 0,
-          max: 1000,
+          min: 0, // 最小值（根据两值对应颜色深浅）
+          max: _this.chartObj.maxNum, // 最大值（根据两值对应颜色深浅）
           text: ['High', 'Low'],
           realtime: true,
           calculable: true,

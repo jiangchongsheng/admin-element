@@ -20,6 +20,7 @@ export default {
       chartChinaObj: {
         id: 'china',
         text: '中国地图',
+        maxNum: 10,
         data: [{
           name: '四川',
           value: '1212'
@@ -58,16 +59,135 @@ export default {
   },
   methods: {
     getChinaData() {
-      this.chartChinaObj['data'] = [{
-        name: '内蒙古',
-        value: '12'
+      const arr = [{
+        'province': '北京市',
+        'count': 8
       }, {
-        name: '山东',
-        value: '33'
+        'province': '天津市',
+        'count': 10
       }, {
-        name: '新疆',
-        value: '332'
+        'province': '河北省',
+        'count': 5
+      }, {
+        'province': '山西省',
+        'count': 2
+      }, {
+        'province': '内蒙古自治区',
+        'count': 1
+      }, {
+        'province': '辽宁省',
+        'count': 19
+      }, {
+        'province': '吉林省',
+        'count': 2
+      }, {
+        'province': '黑龙江省',
+        'count': 4
+      }, {
+        'province': '上海市',
+        'count': 36
+      }, {
+        'province': '江苏省',
+        'count': 44
+      }, {
+        'province': '浙江省',
+        'count': 11
+      }, {
+        'province': '安徽省',
+        'count': 5
+      }, {
+        'province': '福建省',
+        'count': 1
+      }, {
+        'province': '江西省',
+        'count': 6
+      }, {
+        'province': '山东省',
+        'count': 10
+      }, {
+        'province': '河南省',
+        'count': 8
+      }, {
+        'province': '湖北省',
+        'count': 5
+      }, {
+        'province': '湖南省',
+        'count': 5
+      }, {
+        'province': '广东省',
+        'count': 15
+      }, {
+        'province': '广西壮族自治区',
+        'count': 3
+      }, {
+        'province': '海南省',
+        'count': 1
+      }, {
+        'province': '重庆市',
+        'count': 1
+      }, {
+        'province': '四川省',
+        'count': 4
+      }, {
+        'province': '贵州省',
+        'count': 2
+      }, {
+        'province': '云南省',
+        'count': 3
+      }, {
+        'province': '西藏自治区',
+        'count': 2
+      }, {
+        'province': '陕西省',
+        'count': 6
+      }, {
+        'province': '甘肃省',
+        'count': 2
+      }, {
+        'province': '青海省',
+        'count': 0
+      }, {
+        'province': '宁夏回族自治区',
+        'count': 3
+      }, {
+        'province': '新疆维吾尔自治区',
+        'count': 2
+      }, {
+        'province': '台湾省',
+        'count': 0
+      }, {
+        'province': '香港特别行政区',
+        'count': 0
+      }, {
+        'province': '澳门特别行政区',
+        'count': 0
       }]
+
+      const newData = []
+      let maxNum = 0
+      arr.forEach(element => {
+        if (maxNum <= element.count) {
+          maxNum = element.count
+        }
+        switch (element.province.length) {
+          case 3 :case 5:case 8:case 7:
+            element.province = element.province.substring(0, 2)
+            break
+          case 4: case 6:
+            element.province = element.province.substring(0, 3)
+            break
+          default:
+            console.log(element)
+        }
+        newData.push({
+          value: element.count,
+          name: element.province
+        })
+      })
+
+      console.log(newData)
+      this.chartChinaObj['data'] = newData
+      this.chartChinaObj['maxNum'] = maxNum
     },
     getCakeData() {
       this.charCaketObj['data'] = [{

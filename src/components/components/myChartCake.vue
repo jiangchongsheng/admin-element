@@ -62,50 +62,59 @@ export default {
           // trigger: 'item'
           // formatter: "{a} <br/>{b} : {c} ({d}%)"
         },
-        legend: {
-          orient: 'horizontal',
-          left: 'left',
-          y: 'bottom'
-          // data: ['直接访问', '邮件营销', '联盟广告', '视频广告', '搜索引擎']
-          // data: _this.chartObj.nameList
-        },
+        // legend: {
+        //   // orient: 'horizontal',
+        //   // left: 'left',
+        //   // y: 'bottom'
+        //   // data: ['直接访问', '邮件营销', '联盟广告', '视频广告', '搜索引擎']
+        //   // data: _this.chartObj.nameList
+        // },
         series: [
+          // 设置百分比的饼状图
           {
             name: _this.chartObj.text,
             type: 'pie',
-            radius: '50%',
-            center: ['50%', '30%'],
-            data: _this.chartObj.data,
-            label: {
+            radius: '60%',
+            center: ['40%', '40%'],
+            itemStyle: {
               normal: {
-                show: false,
-                position: 'center'
-              },
-              emphasis: {
-                show: true,
-                textStyle: {
-                  fontSize: '30',
-                  fontWeight: 'bold'
+                label: { // 饼图图形上的文本标签
+                  show: true,
+                  position: 'inner', // 标签的位置
+                  textStyle: {
+                    fontWeight: 300,
+                    fontSize: 12 // 文字的字体大小
+                  },
+                  formatter: '{d}'
+                },
+
+                labelLine: {
+                  show: false // 隐藏标示线
                 }
               }
             },
-            labelLine: {
+            data: _this.chartObj.data // function 传进来的数据
+          },
+          { // 设置指示线和指示线上的文字的饼状图
+            name: _this.chartObj.text,
+            type: 'pie',
+            radius: '60%',
+            center: ['40%', '40%'],
+            itemStyle: {
               normal: {
-                show: false
+                label: { // 饼图图形上的文本标签
+                  show: true
+                },
+
+                labelLine: {
+                  show: true // 隐藏标示线
+                }
               }
             },
-            itemStyle: {
-              emphasis: {
-                shadowBlur: 10,
-                shadowOffsetX: 0,
-                shadowColor: 'rgba(0, 0, 0, 0.5)'
-              }
-            }
+            data: _this.chartObj.data // function 传进来的数据
           }
         ]
       }
-
-      // alert(2);
 
       // 绘制图表
       myChart.setOption(option)
