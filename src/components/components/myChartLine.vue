@@ -80,6 +80,16 @@ export default {
         },
         series: [{
           type: 'line',
+          symbol: 'circle', // 拐点类型
+          // 当smooth为true时，就是光滑的曲线（默认为true）；当为false，就是折线不是曲线的了，那这个设为true，
+          smooth: true, 
+          symbolSize: 5, // 拐点圆的大小
+          itemStyle: {
+            normal: {
+              color: '#C33834', // 折线条的颜色
+              borderColor: '#C33834' // 拐点边框颜色
+            }
+          },
           data: _this.chartObj.data,
           showSymbol: false,
           hoverAnimation: false

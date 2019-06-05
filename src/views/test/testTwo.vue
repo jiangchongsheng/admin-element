@@ -1,8 +1,12 @@
 <template>
-  <div>
-    12
+  <div class="yeluosen">
+    <input v-model="message" type="text">
+    <button
+      v-clipboard:copy="message"
+      v-clipboard:success="onCopy"
+      v-clipboard:error="onError"
+      type="button">复制</button>
   </div>
-
 </template>
 
 <script>
@@ -10,7 +14,7 @@
 export default {
   data() {
     return {
-
+      message: '这里是复制的内容'
     }
   },
   created() {
@@ -19,7 +23,12 @@ export default {
   mounted() {
   },
   methods: {
-    // ====================== 变更账户
+    onCopy(e) {
+      console.log('复制成功！')
+    },
+    onError(e) {
+      console.log('复制失败！')
+    }
 
   }
 }

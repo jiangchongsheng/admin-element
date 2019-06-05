@@ -4,8 +4,13 @@
     <verification-code />
     <qr-code />
 
+    <copy-msg :msg="aaa"/>
+
+    <copy-msg msg="13445"/>
+
     <!-- <ckeditor /> -->
-  </div>
+
+  </copy-msg></div>
 
 </template>
 

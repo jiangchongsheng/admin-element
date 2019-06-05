@@ -6,6 +6,8 @@ import ElementUI from 'element-ui'
 import 'element-ui/lib/theme-chalk/index.css'
 import i18n from './lang' // Internationalization
 
+import VueClipboards from 'vue-clipboard2'
+
 import '@/styles/index.scss' // global css
 
 import CustComponents from './components/index'
@@ -21,6 +23,8 @@ import '@/permission' // permission control
 Vue.use(ElementUI, { i18n: (key, value) => i18n.t(key, value) })
 
 Vue.use(CustComponents)
+
+Vue.use(VueClipboards)
 
 Vue.config.productionTip = false
 
