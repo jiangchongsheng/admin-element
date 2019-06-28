@@ -54,7 +54,7 @@ export const asyncRouterMap = [
     component: Layout,
     redirect: 'user/index',
     meta: {
-      roles: ['admin'],
+      roles: ['admin', 'input'],
       title: 'user',
       icon: 'users'
     },
@@ -64,7 +64,7 @@ export const asyncRouterMap = [
         component: () => import('@/views/user/index'),
         name: 'index',
         meta: {
-          roles: ['admin'],
+          roles: ['admin', 'input'],
           title: 'user',
           icon: 'users'
         }
@@ -78,7 +78,7 @@ export const asyncRouterMap = [
     component: Layout,
     redirect: 'table/index',
     meta: {
-      roles: ['admin'],
+      roles: ['admin', 'input'],
       title: 'table',
       icon: 'table'
     },
@@ -88,7 +88,7 @@ export const asyncRouterMap = [
         component: () => import('@/views/table/index'),
         name: 'index',
         meta: {
-          roles: ['admin'],
+          roles: ['admin', 'input'],
           title: 'table',
           icon: 'table'
         }
@@ -102,7 +102,7 @@ export const asyncRouterMap = [
     component: Layout,
     redirect: 'chart/index',
     meta: {
-      roles: ['admin'],
+      roles: ['role'],
       title: 'chart',
       icon: 'tree'
     },
@@ -112,7 +112,7 @@ export const asyncRouterMap = [
         component: () => import('@/views/chart/index'),
         name: 'index',
         meta: {
-          roles: ['admin'],
+          roles: ['admin', 'input'],
           title: 'chart',
           icon: 'tree'
         }
@@ -126,7 +126,7 @@ export const asyncRouterMap = [
     component: Layout,
     redirect: 'test/testOne',
     meta: {
-      roles: ['admin'], // 角色admin
+      roles: ['admin', 'input'], // 角色admin
       title: 'test',
       icon: 'jiaose'
     },
@@ -138,7 +138,7 @@ export const asyncRouterMap = [
         meta: {
           title: 'testOne',
           icon: 'ku',
-          roles: ['admin'] // 角色admin
+          roles: ['admin', 'input'] // 角色admin
         }
       },
       {

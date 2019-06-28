@@ -50,8 +50,10 @@ const permission = {
     GenerateRoutes({ commit }, data) {
       return new Promise(resolve => {
         const { roles } = data
+        console.log('roles', roles)
         let accessedRouters
-        if (roles.includes('admin')) {
+        console.log('asyncRouterMap', asyncRouterMap)
+        if (roles.includes('admin')) { // 权限admin 所有
           accessedRouters = asyncRouterMap
         } else {
           accessedRouters = filterAsyncRouter(asyncRouterMap, roles)

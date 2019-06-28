@@ -9,7 +9,7 @@ export default {
     Vue.component('my-chart-cake', () => import('./components/myChartCake.vue')) // echarts 饼图
     Vue.component('my-chart-line', () => import('./components/myChartLine.vue')) // echarts 折线图
 
-    Vue.component('copy-msg', () => import('./components/copyMsg.vue')) // echarts 折线图
+    Vue.component('copy-msg', () => import('./components/copyMsg.vue')) // 复制组件
 
     // myChartCake
   }
