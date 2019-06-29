@@ -20,7 +20,7 @@
             <span>{{ scope.row.account }}</span>
           </template>
         </el-table-column>
-        <el-table-column label="密码" align="center">
+        <el-table-column label="密码111" align="center">
           <template slot-scope="scope">
             {{ scope.row.password }}
           </template>
