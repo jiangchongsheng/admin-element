@@ -82,7 +82,7 @@ export default {
           type: 'line',
           symbol: 'circle', // 拐点类型
           // 当smooth为true时，就是光滑的曲线（默认为true）；当为false，就是折线不是曲线的了，那这个设为true，
-          smooth: true, 
+          smooth: true,
           symbolSize: 5, // 拐点圆的大小
           itemStyle: {
             normal: {

@@ -2,7 +2,6 @@
   <div class="app-container">
 
     <div >table+分页组件(列表需进行数据操作示例)</div>
-
     <pagination :total="100" @get-data="getPageData1">
       <el-table
         v-loading="loading1"
@@ -45,7 +44,6 @@
     </pagination >
 
     <div>普通table+分页组件</div>
-
     <pagination :total="100" @get-data="getPageData2">
       <el-table
         v-loading="loading2"
@@ -87,6 +85,72 @@
       </el-table>
     </pagination>
 
+    <div>table行内编辑+分页组件</div>
+    <pagination :total="100" @get-data="getPageData2">
+      <el-table
+        v-loading="loading3"
+        :data="list3"
+        border
+        style="width: 100%">
+
+        <el-table-column label="日期" align="center">
+          <template slot-scope="scope">
+            <el-date-picker
+              v-if="scope.row.edit"
+              v-model="scope.row.date"
+              value-format="yyyy-MM-dd"
+              type="date"
+              placeholder="选择日期"/>
+            <span v-else>{{ scope.row.date }}</span>
+          </template>
+        </el-table-column>
+
+        <el-table-column label="姓名" align="center">
+          <template slot-scope="scope">
+            <el-input v-if="scope.row.edit" v-model="scope.row.name"/>
+            <span v-else>{{ scope.row.name }}</span>
+          </template>
+        </el-table-column>
+
+        <el-table-column label="省份" align="center">
+          <template slot-scope="scope">
+            <el-input v-if="scope.row.edit" v-model="scope.row.province"/>
+            <span v-else>{{ scope.row.province }}</span>
+          </template>
+        </el-table-column>
+
+        <el-table-column label="市区" align="center">
+          <template slot-scope="scope">
+            <el-input v-if="scope.row.edit" v-model="scope.row.city"/>
+            <span v-else>{{ scope.row.city }}</span>
+          </template>
+        </el-table-column>
+
+        <el-table-column label="地址" align="center">
+          <template slot-scope="scope">
+            <el-input v-if="scope.row.edit" v-model="scope.row.address"/>
+            <span v-else>{{ scope.row.address }}</span>
+          </template>
+        </el-table-column>
+
+        <el-table-column label="邮编" align="center">
+          <template slot-scope="scope">
+            <el-input v-if="scope.row.edit" v-model="scope.row.zip"/>
+            <span v-else>{{ scope.row.zip }}</span>
+          </template>
+        </el-table-column>
+
+        <el-table-column
+          align="center"
+          label="操作">
+          <template slot-scope="scope">
+            <el-button type="text" size="small" @click="editData(scope.row)">编辑</el-button>
+            <el-button type="text" size="small" @click="saveData(scope.row)">保存</el-button>
+          </template>
+        </el-table-column>
+      </el-table>
+    </pagination>
+
     <!-- 弹出框 -->
     <el-dialog
       :visible.sync="dialogVisible"
@@ -116,6 +180,7 @@ export default {
 
   data() {
     return {
+      // 表格一
       loading1: false,
       list1: [{
         account: '1234567',
@@ -128,7 +193,7 @@ export default {
         status: '2',
         time: '2019-3-30'
       }],
-
+      // 表格二
       loading2: false,
       list2: [{
         date: '2016-05-02',
@@ -144,6 +209,26 @@ export default {
         city: '普陀区',
         address: '上海市普陀区金沙江路 1517 弄',
         zip: 200333
+      }],
+
+      // 表格三
+      loading3: false,
+      list3: [{
+        date: '2016-05-02',
+        name: '王小虎',
+        province: '上海',
+        city: '普陀区',
+        address: '上海市普陀区金沙江路 1518 弄',
+        zip: 200333,
+        edit: false // 区分修改
+      }, {
+        date: '2016-05-04',
+        name: '王小虎',
+        province: '上海',
+        city: '普陀区',
+        address: '上海市普陀区金沙江路 1517 弄',
+        zip: 200333,
+        edit: false // 区分修改
       }],
 
       dialogVisible: false
@@ -169,6 +254,17 @@ export default {
     // 弹出框关闭
     handleClose(done) {
       done()
+    },
+
+    // 表格三编辑
+    editData(row) {
+      var obj = row
+      obj['edit'] = true
+    },
+    // 表格三保存
+    saveData(row) {
+      var obj = row
+      obj['edit'] = false
     }
   }
 }
