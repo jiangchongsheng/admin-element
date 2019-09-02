@@ -74,14 +74,6 @@
           prop="zip"
           label="邮编"
           align="center"/>
-        <el-table-column
-          align="center"
-          label="操作">
-          <template slot-scope="scope">
-            <el-button type="text" size="small">查看</el-button>
-            <el-button type="text" size="small">编辑</el-button>
-          </template>
-        </el-table-column>
       </el-table>
     </pagination>
 
@@ -91,8 +83,17 @@
         v-loading="loading3"
         :data="list3"
         border
-        style="width: 100%">
-
+        style="width: 100%"
+        @selection-change="handleSelectionChange">
+        <el-table-column
+          :selectable="checkboxInit"
+          type="selection"
+          width="55"/>
+        <el-table-column align="center" width="100">
+          <template slot-scope="scope">
+            <el-radio v-model="radio" :label="scope.$index" @change.native="getCurrentRow(scope.row)">&nbsp;</el-radio>
+          </template>
+        </el-table-column>
         <el-table-column label="日期" align="center">
           <template slot-scope="scope">
             <el-date-picker
@@ -150,6 +151,9 @@
         </el-table-column>
       </el-table>
     </pagination>
+
+    <div>本地表格模板下载</div>
+    <el-button type="text" size="small" @click="templateDownload">模板下载</el-button>
 
     <!-- 弹出框 -->
     <el-dialog
@@ -229,7 +233,24 @@ export default {
         address: '上海市普陀区金沙江路 1517 弄',
         zip: 200333,
         edit: false // 区分修改
+      }, {
+        date: '2016-05-04',
+        name: '王大虎',
+        province: '上海',
+        city: '普陀区',
+        address: '上海市普陀区金沙江路 1517 弄',
+        zip: 200333,
+        edit: false // 区分修改
+      }, {
+        date: '2016-05-04',
+        name: '王小虎',
+        province: '上海',
+        city: '普陀区',
+        address: '上海市普陀区金沙江路 1517 弄',
+        zip: 200333,
+        edit: false // 区分修改
       }],
+      radio: '',
 
       dialogVisible: false
     }
@@ -265,6 +286,27 @@ export default {
     saveData(row) {
       var obj = row
       obj['edit'] = false
+    },
+    // 表格三复选框change
+    handleSelectionChange(list) {
+      console.log(list)
+    },
+    // 表格三复选框默认禁选
+    checkboxInit(row, index) {
+      if (row.name === '王大虎') { // 你需要判断的条件
+        return 0// 不可勾选
+      } else {
+        return 1// 可勾选
+      }
+    },
+    // 表格三单选框change
+    getCurrentRow(row) {
+      console.log(row)
+    },
+
+    // 模板导出
+    templateDownload() {
+      window.location.assign('/static/默认模板.xlsx')
     }
   }
 }

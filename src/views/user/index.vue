@@ -29,16 +29,16 @@
         width="200"/>
       <el-table-column label="操作" width="200" align="center">
         <template slot-scope="scope">
+          <!-- v-if="hasPermission('role:update')" -->
           <el-button
-            v-if="hasPermission('role:update')"
             size="mini"
             @click="handleEdit(scope.row)">编辑
           </el-button>
+          <!-- v-if="hasPermission('role:delete')" -->
           <el-button
-            v-if="hasPermission('role:delete')"
             size="mini"
             type="danger"
-            @click="handleDelete(scope.row)">删除
+            @click="handleDelete(scope.$index, tableData)">删除
           </el-button>
         </template>
       </el-table-column>
@@ -56,7 +56,7 @@
         style="width: 1000px; margin-left:50px;margin-top: 20px;">
 
         <el-form-item label="角色名称" prop="roleName">
-          <el-input v-model="addList.roleName" class="testStyle"/>
+          <el-input v-model.trim="addList.roleName" class="testStyle"/>
         </el-form-item>
 
         <el-form-item label="角色设置">
@@ -67,9 +67,7 @@
               :name="group"
               v-model="addList.permissionData[group].checkAll"
               @change="handleCheckAllChange">{{
-              originDataTitle[group] }} <i
-                class="el-icon-caret-bottom
-"/>
+              originDataTitle[group] }} <i class="el-icon-check"/>
             </el-checkbox>
             <el-checkbox-group v-model="addList.permissions[group]">
               <el-checkbox
@@ -142,30 +140,14 @@ export default {
       },
       Total: 0,
       addPopup: true,
+      // 一级菜单
       originDataTitle: {
-        employee: '账户管理',
         user: '日志管理',
         role: '患者端'
       },
+      // 权限数据（二级菜单）
       originData: {
-        employee: [{
-          permissionName: 'employee:query',
-          permissionBrief: '查询'
-        }, {
-          permissionName: 'employee:add',
-          permissionBrief: '添加员工'
-
-        }, {
-          permissionName: 'employee:import',
-          permissionBrief: '员工导入'
-        }, {
-          permissionName: 'employee:update',
-          permissionBrief: '编辑'
-
-        }, {
-          permissionName: 'employee:delete',
-          permissionBrief: '删除'
-        }],
+        // 用户权限
         user: [{
           permissionName: 'user:query',
           permissionBrief: '查询'
@@ -179,6 +161,7 @@ export default {
           permissionName: 'user:delete',
           permissionBrief: '删除'
         }],
+        // 角色权限
         role: [{
           permissionName: 'role:query',
           permissionBrief: '查询'
@@ -234,7 +217,7 @@ export default {
     },
     // 弹出框关闭
     dialogClose() {
-      console.log('closed')
+      // 初始化数据
       this.$refs['addList'].resetFields()
       this.addList.roleName = ''
       this.addList['id'] = ''
@@ -277,15 +260,69 @@ export default {
       }
       return data
     },
+    // 表格编辑
+    handleEdit(row) {
+      this.dialogStatus = 'update'
+      this.addPopup = true
+
+      this.addList = row
+      console.log(row)
+    },
+    // 表格删除
+    handleDelete(index, rows) {
+      this.$confirm('是否删除?', '提示', {
+        confirmButtonText: '确定',
+        cancelButtonText: '取消',
+        type: 'warning'
+      })
+        .then(() => {
+          // 删除接口
+          rows.splice(index, 1)
+        })
+        .catch(() => {
+          // this.$message({
+          //   type: 'info',
+          //   message: '已取消删除'
+          // })
+        })
+    },
     // 弹出框内添加
     addAccountList(formName) {
       this.$refs[formName].validate(valid => {
         if (valid) {
           console.log('data', this.addList)
+          console.log('permissions', this.addList.permissions)
+
+          const data = { ...this.addList }
+          sessionStorage.setItem('Roledata', JSON.stringify(data))
+          this.getQueryList()
+          this.addPopup = false
         } else {
           return false
         }
       })
+    },
+    // 弹出框内修改
+    editAccountList(formName) {
+      this.$refs[formName].validate(valid => {
+        if (valid) {
+          // console.log('data', this.addList)
+          // console.log('permissions', this.addList.permissions)
+          // sessionStorage.setItem('Roledata', JSON.stringify(this.addList))
+          // this.getQueryList()
+          // this.addPopup = false
+        } else {
+          return false
+        }
+      })
+    },
+
+    // 表格渲染
+    getQueryList() {
+      if (sessionStorage.getItem('Roledata')) {
+        var data = JSON.parse(sessionStorage.getItem('Roledata'))
+        this.tableData.push(data)
+      }
     }
 
   }
