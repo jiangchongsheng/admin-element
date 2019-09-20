@@ -120,6 +120,30 @@ export const asyncRouterMap = [
     ]
   },
 
+  // 表单控件
+  {
+    path: '/form',
+    component: Layout,
+    redirect: 'form/index',
+    meta: {
+      roles: ['role'],
+      title: 'form',
+      icon: 'tree'
+    },
+    children: [
+      {
+        path: 'form',
+        component: () => import('@/views/form/index'),
+        name: 'index',
+        meta: {
+          roles: ['admin', 'input'],
+          title: 'form',
+          icon: 'tree'
+        }
+      }
+    ]
+  },
+
   // 测试菜单==============
   {
     path: '/test',

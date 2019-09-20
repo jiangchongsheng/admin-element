@@ -143,6 +143,7 @@
 
         <el-table-column
           align="center"
+          fixed="right"
           label="操作">
           <template slot-scope="scope">
             <el-button type="text" size="small" @click="editData(scope.row)">编辑</el-button>
