@@ -89,7 +89,7 @@
           :selectable="checkboxInit"
           type="selection"
           width="55"/>
-        <el-table-column align="center" width="100">
+        <el-table-column align="center" width="100" label="单选框">
           <template slot-scope="scope">
             <el-radio v-model="radio" :label="scope.$index" @change.native="getCurrentRow(scope.row)">&nbsp;</el-radio>
           </template>

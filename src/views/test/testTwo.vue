@@ -1,6 +1,7 @@
 <template>
   <div>
-    <js-barcode/>
+    <js-barcode ref-id="barcodeId" content="123123"/>
+    <identify v-model="content"/>
   </div>
 </template>
 
@@ -8,15 +9,7 @@
 export default {
   data() {
     return {
-    }
-  },
-  watch: {
-    objData: {
-      handler() {
-        // this.drawLine()
-      },
-      deep: true
-
+      content: '12324'
     }
   },
   created() {

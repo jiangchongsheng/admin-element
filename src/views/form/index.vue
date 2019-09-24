@@ -2,26 +2,13 @@
   <div>
     <el-form ref="ruleForm" :model="ruleForm" :rules="rules" label-width="100px" class="demo-ruleForm">
       <el-form-item label="活动名称" prop="name">
-        <el-input v-model="ruleForm.name"/>
+        <el-input v-model.trim="ruleForm.name" class="input-width"/>
       </el-form-item>
       <el-form-item label="活动区域" prop="region">
-        <el-select v-model="ruleForm.region" placeholder="请选择活动区域">
-          <el-option label="区域一" value="shanghai"/>
-          <el-option label="区域二" value="beijing"/>
+        <el-select v-model="ruleForm.region" placeholder="请选择活动区域" class="input-width">
+          <el-option label="选项一" value="1"/>
+          <el-option label="选项二" value="2"/>
         </el-select>
-      </el-form-item>
-      <el-form-item label="活动时间" required>
-        <el-col :span="11">
-          <el-form-item prop="date1">
-            <el-date-picker v-model="ruleForm.date1" type="date" placeholder="选择日期" style="width: 100%;"/>
-          </el-form-item>
-        </el-col>
-        <el-col :span="2" class="line">-</el-col>
-        <el-col :span="11">
-          <el-form-item prop="date2">
-            <el-time-picker v-model="ruleForm.date2" placeholder="选择时间" style="width: 100%;"/>
-          </el-form-item>
-        </el-col>
       </el-form-item>
       <el-form-item label="即时配送" prop="delivery">
         <el-switch v-model="ruleForm.delivery"/>
@@ -41,7 +28,7 @@
         </el-radio-group>
       </el-form-item>
       <el-form-item label="活动形式" prop="desc">
-        <el-input v-model="ruleForm.desc" type="textarea"/>
+        <el-input v-model.trim="ruleForm.desc" type="textarea" class="input-width"/>
       </el-form-item>
       <el-form-item>
         <el-button type="primary" @click="submitForm('ruleForm')">立即创建</el-button>
@@ -58,8 +45,6 @@ export default {
       ruleForm: {
         name: '',
         region: '',
-        date1: '',
-        date2: '',
         delivery: false,
         type: [],
         resource: '',
@@ -72,12 +57,6 @@ export default {
         ],
         region: [
           { required: true, message: '请选择活动区域', trigger: 'change' }
-        ],
-        date1: [
-          { type: 'date', required: true, message: '请选择日期', trigger: 'change' }
-        ],
-        date2: [
-          { type: 'date', required: true, message: '请选择时间', trigger: 'change' }
         ],
         type: [
           { type: 'array', required: true, message: '请至少选择一个活动性质', trigger: 'change' }
@@ -97,7 +76,7 @@ export default {
     submitForm(formName) {
       this.$refs[formName].validate((valid) => {
         if (valid) {
-          alert('submit!')
+          console.log(this.ruleForm)
         } else {
           console.log('error submit!!')
           return false

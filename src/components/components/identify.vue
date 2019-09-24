@@ -8,6 +8,8 @@
   </div>
 </template>
 <script>
+// 使用  v-model内值全为小写
+// <identify v-model="content"/>
 export default {
   name: 'SIdentify',
   model: {
@@ -49,6 +51,7 @@ export default {
   },
   data() {
     return {
+      showContent: '0123456789abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ',
       identifyCode: '1232'
     }
   },
@@ -67,10 +70,15 @@ export default {
       this.identifyCode = ''
 
       for (let i = 0; i < 4; i++) {
-        this.identifyCode += this.randomNum(0, 10) // 0 - 9
+        // this.identifyCode += this.randomNum(0, 10) // 0 - 9
+        this.identifyCode += this.showContent[this.randomNum(0, this.showContent.length)] // 0 - 9
       }
 
-      this.$emit('input', this.identifyCode)
+      console.log('值', this.identifyCode)
+      // toUpperCase()：把字符串转换为大写；
+      // toLowerCase() ：把字符串转换为小写
+
+      this.$emit('input', this.identifyCode.toLowerCase())
     },
 
     // 生成一个随机数
