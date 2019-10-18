@@ -9,9 +9,8 @@
 </template>
 
 <script>
-
+// 示例  <copy-msg :msg="我是复制的内容"/>
 export default {
-  // 示例  <copy-msg :msg="我是复制的内容"/>
   props: {
     // 需要复制德内容
     msg: {

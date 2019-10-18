@@ -1,5 +1,5 @@
 <template>
-  <!-- 图片验证码展示 0-9 纯数字 4位 -->
+  <!-- 图片验证码展示 4位 随机数字字母 -->
   <div class="s-canvas" @click="changeCode">
     <canvas
       id="s-canvas"
@@ -8,7 +8,7 @@
   </div>
 </template>
 <script>
-// 使用  v-model内值全为小写
+// 使用 注：v-model内值全为小写
 // <identify v-model="content"/>
 export default {
   name: 'SIdentify',
@@ -51,6 +51,7 @@ export default {
   },
   data() {
     return {
+      // 展示的内容
       showContent: '0123456789abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ',
       identifyCode: '1232'
     }
@@ -140,7 +141,5 @@ export default {
       }
     }
   }
-  // 示例
-  // <identify v-model="aaa"/>
 }
 </script>

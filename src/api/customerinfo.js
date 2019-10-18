@@ -160,3 +160,13 @@ export function delrelationship(data) {
     data: data
   })
 }
+
+// 批量下载
+export function downloads(query) {
+  return request({
+    url: '/videoPicture/downloads',
+    method: 'get',
+    params: query,
+    responseType: 'blob'
+  })
+}

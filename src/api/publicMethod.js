@@ -1,8 +1,8 @@
-// 开单公用方法
+// 公用方法
 import moment from 'moment'
 import NP from 'number-precision'
 // eslint-disable-next-line require-jsdoc
-export function intToChinese(money) { // 金额
+export function intToChinese(money) { // 数字变繁体金额
   // 汉字的数字
   var cnNums = ['零', '壹', '贰', '叁', '肆', '伍', '陆', '柒', '捌', '玖']
   // 基本单位
@@ -112,25 +112,6 @@ export function roleAdmin() { // 角色（判断是否为 现场开单管理员�
 }
 // eslint-disable-next-line require-jsdoc
 export function simpleAlgorithm(val1, val2, is) { // +-避免丢失精度计算
-  // let max = 0;  // 小数个数
-  // var x1 = String(val1).indexOf('.') + 1; //小数点的位置
-  // var y1 = String(val1).length - x1;  // 几位小树
-
-  // var x2 = String(val2).indexOf('.') + 1; //小数点的位置
-  // var y2 = String(val2).length - x2;  // 几位小树
-  // if (y1 > y2) {
-  //   max = y1;
-  // } else {
-  //   max = y2;
-  // }
-  // if (is === "+") {
-  //   return (val1 * Math.pow(10, max) + val2 * Math.pow(10, max)) / Math.pow(10, max);
-  // } else if (is === "-") {
-  //   return (val1 * Math.pow(10, max) - val2 * Math.pow(10, max)) / Math.pow(10, max);
-  // } else if (is === "*") {
-  //   return (val1 * 10000 * val2) / 10000;
-  // }
-
   if (is === '+') {
     return NP.plus(val1, val2)
   } else if (is === '-') {

@@ -7,6 +7,8 @@
 
 import VueQr from 'vue-qr'
 
+// 示例 <qr-code value="我是扫描出来的值"/>
+
 export default {
   name: 'SIdentify',
   components: {
