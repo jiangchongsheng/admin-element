@@ -31,6 +31,7 @@ const user = {
       const username = userInfo.username.trim()
       return new Promise((resolve, reject) => {
         login(username, userInfo.password).then(response => {
+          console.log(response);
           const data = response
           if (data.code !== '0000') { // 不等于失败状态
             reject(data.msg)

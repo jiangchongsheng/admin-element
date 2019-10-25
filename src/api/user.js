@@ -1,4 +1,12 @@
 import request from '@/utils/request'
+// 用户列表
+export function userList(query) {
+  return request({
+    url: '/user',
+    method: 'get',
+    data: query
+  })
+}
 
 // 用户管理 S
 // 编辑用户信息

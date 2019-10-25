@@ -2,7 +2,7 @@
   <div>
     <div class="headQuery">
       <span>角色名称：</span>
-      <el-input v-model="queryValue.name" placeholder="请选择姓名" class="txtStyle"/>
+      <el-input v-model.trim="queryValue.name" placeholder="请选择姓名" class="txtStyle"/>
 
       <el-button type="primary" size="small" @click="querybtn">查询</el-button>
     </div>
@@ -15,7 +15,7 @@
     <!-- 表格 -->
     <el-table
       :data="tableData"
-      style="width:521px; margin-left:40px"
+      style="width:1000px; margin-left:40px"
       border>
       <el-table-column
         type="index"
@@ -25,6 +25,16 @@
       <el-table-column
         prop="roleName"
         label="角色名称"
+        align="center"
+        width="200"/>
+      <el-table-column
+        prop="creationTime"
+        label="创建时间"
+        align="center"
+        width="200"/>
+      <el-table-column
+        prop="roleDescription"
+        label="角色描述"
         align="center"
         width="200"/>
       <el-table-column label="操作" width="200" align="center">
@@ -38,7 +48,7 @@
           <el-button
             size="mini"
             type="danger"
-            @click="handleDelete(scope.$index, tableData)">删除
+            @click="handleDelete(scope.row)">删除
           </el-button>
         </template>
       </el-table-column>
@@ -57,6 +67,10 @@
 
         <el-form-item label="角色名称" prop="roleName">
           <el-input v-model.trim="addList.roleName" class="testStyle"/>
+        </el-form-item>
+
+        <el-form-item label="角色描述" prop="roleDescription">
+          <el-input v-model.trim="addList.roleDescription" class="testStyle"/>
         </el-form-item>
 
         <el-form-item label="角色设置">
@@ -99,7 +113,7 @@
 </template>
 
 <script>
-// import { query, del, add, update, queryRolePermission } from '@/api/role'
+import { getRoleInfoList, getRoleDetails, delRole, addRole } from '@/api/role'
 // import { hasPermission } from '@/utils/valid'
 
 export default {
@@ -178,6 +192,7 @@ export default {
       },
       addList: {
         roleName: '',
+        roleDescription: '',
         perms: [],
         permissions: {
           employee: [],
@@ -208,12 +223,18 @@ export default {
   },
   created() {
     this.addPopup = false
-    // this.loadData()
+
+    this.getQueryList()
   },
   methods: {
     // 查询按钮
-    querybtn() {
 
+    querybtn() {
+      getRoleDetails({ id: this.queryValue.name }).then(res => {
+        if (res.code === 1) {
+          this.tableData = res.data
+        }
+      })
     },
     // 弹出框关闭
     dialogClose() {
@@ -248,16 +269,19 @@ export default {
       var data = {
         id: this.addList['id'],
         roleName: this.addList.roleName,
-        perms: []
+        roleDescription: this.addList.roleDescription,
+        perms: ''
       }
+      var list = []
       for (var item in this.addList.permissions) {
         if (this.addList.permissions[item].length > 0) {
-          data.perms.push(item)
+          list.push(item)
         }
         this.addList.permissions[item].forEach((i) => {
-          data.perms.push(i)
+          list.push(i)
         })
       }
+      data.perms = list.join(',')
       return data
     },
     // 表格编辑
@@ -269,7 +293,7 @@ export default {
       console.log(row)
     },
     // 表格删除
-    handleDelete(index, rows) {
+    handleDelete(row) {
       this.$confirm('是否删除?', '提示', {
         confirmButtonText: '确定',
         cancelButtonText: '取消',
@@ -277,7 +301,14 @@ export default {
       })
         .then(() => {
           // 删除接口
-          rows.splice(index, 1)
+          delRole({ id: row.roleId }).then(res => {
+            if (res.code === 1) {
+              this.$message.success(res.message)
+              this.getQueryList()
+            } else {
+              this.$message.error(res.message)
+            }
+          })
         })
         .catch(() => {
           // this.$message({
@@ -290,13 +321,16 @@ export default {
     addAccountList(formName) {
       this.$refs[formName].validate(valid => {
         if (valid) {
-          console.log('data', this.addList)
-          console.log('permissions', this.addList.permissions)
-
-          const data = { ...this.addList }
-          sessionStorage.setItem('Roledata', JSON.stringify(data))
-          this.getQueryList()
-          this.addPopup = false
+          var data = this.getData()
+          addRole(data).then(res => {
+            if (res.code === 1) {
+              this.$message.success(res.message)
+              this.getQueryList()
+              this.addPopup = false
+            } else {
+              this.$message.error(res.message)
+            }
+          })
         } else {
           return false
         }
@@ -319,10 +353,11 @@ export default {
 
     // 表格渲染
     getQueryList() {
-      if (sessionStorage.getItem('Roledata')) {
-        var data = JSON.parse(sessionStorage.getItem('Roledata'))
-        this.tableData.push(data)
-      }
+      getRoleInfoList().then(res => {
+        if (res.code === 1) {
+          this.tableData = res.data
+        }
+      })
     }
 
   }

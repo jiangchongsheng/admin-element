@@ -11,15 +11,13 @@ module.exports = {
     // 编译发布上线路径的根目录，可配置为资源服务器域名或 CDN 域名
     assetsPublicPath: '/',
     // 需要 proxyTable 代理的接口（可跨域）
-    // proxyTable: {
-    //   '/': {
-    //     // 开发环境
-    //     target: 'http://10.40.143.77:9876',
-    //     // target: 'http://10.10.1.237:8080',//宋建超
-    //     // target: 'http://10.10.1.111:8080',//刘成
-    //     changeOrigin: true
-    //   }
-    // },
+    proxyTable: {
+      '/': {
+        // 开发环境
+        target: 'http://127.0.0.1:8088',
+        changeOrigin: true
+      }
+    },
 
     // Various Dev Server settings
     host: 'localhost', // can be overwritten by process.env.HOST
