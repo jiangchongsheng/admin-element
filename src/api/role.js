@@ -5,7 +5,7 @@ export function getRoleInfoList(data) {
   return request({
     url: '/api/getRoleInfoList',
     method: 'get',
-    data: data
+    params: data
   })
 }
 
@@ -31,6 +31,15 @@ export function delRole(data) {
 export function addRole(data) {
   return request({
     url: '/api/addRole',
+    method: 'post',
+    data: data
+  })
+}
+
+// 删除
+export function updateRole(data) {
+  return request({
+    url: '/api/updateRole',
     method: 'post',
     data: data
   })

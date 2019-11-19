@@ -27,11 +27,11 @@
         label="角色名称"
         align="center"
         width="200"/>
-      <el-table-column
-        prop="creationTime"
-        label="创建时间"
-        align="center"
-        width="200"/>
+      <el-table-column label="创建时间" align="center" width="200">
+        <template slot-scope="scope">
+          <span>{{ scope.row.creationTime | dateFiler }}</span>
+        </template>
+      </el-table-column>
       <el-table-column
         prop="roleDescription"
         label="角色描述"
@@ -113,10 +113,16 @@
 </template>
 
 <script>
-import { getRoleInfoList, getRoleDetails, delRole, addRole } from '@/api/role'
+import { getRoleInfoList, getRoleDetails, delRole, addRole, updateRole } from '@/api/role'
 // import { hasPermission } from '@/utils/valid'
+import moment from 'moment'
 
 export default {
+  filters: {
+    dateFiler(value) {
+      return moment(value).format('YYYY-MM-DD HH:mm:ss')
+    }
+  },
   data() {
     return {
 
@@ -156,8 +162,8 @@ export default {
       addPopup: true,
       // 一级菜单
       originDataTitle: {
-        user: '日志管理',
-        role: '患者端'
+        user: '用户管理',
+        role: '角色管理'
       },
       // 权限数据（二级菜单）
       originData: {
@@ -167,7 +173,7 @@ export default {
           permissionBrief: '查询'
         }, {
           permissionName: 'user:add',
-          permissionBrief: '添加账号'
+          permissionBrief: '添加'
         }, {
           permissionName: 'user:update',
           permissionBrief: '编辑'
@@ -181,7 +187,7 @@ export default {
           permissionBrief: '查询'
         }, {
           permissionName: 'role:add',
-          permissionBrief: '添加权限'
+          permissionBrief: '添加'
         }, {
           permissionName: 'role:update',
           permissionBrief: '编辑'
@@ -195,20 +201,15 @@ export default {
         roleDescription: '',
         perms: [],
         permissions: {
-          employee: [],
           user: [],
-          role: [],
-          org: [],
-          customer: []
+          role: []
         },
         permissionData: {
-          employee: {
+          user: {
             checkAll: false,
             isIndeterminate: false
-          }, user: {
-            checkAll: false,
-            isIndeterminate: false
-          }, role: {
+          },
+          role: {
             checkAll: false,
             isIndeterminate: false
           }
@@ -230,11 +231,7 @@ export default {
     // 查询按钮
 
     querybtn() {
-      getRoleDetails({ id: this.queryValue.name }).then(res => {
-        if (res.code === 1) {
-          this.tableData = res.data
-        }
-      })
+      this.getQueryList()
     },
     // 弹出框关闭
     dialogClose() {
@@ -289,8 +286,23 @@ export default {
       this.dialogStatus = 'update'
       this.addPopup = true
 
-      this.addList = row
-      console.log(row)
+      this.addList['id'] = row.roleId
+      this.addList['roleName'] = row.roleName
+      this.addList['roleDescription'] = row.roleDescription
+
+      var perms = row.perms.split(',')
+      this.addList.perms = perms
+
+      for (var group in this.addList.permissions) {
+        if (perms.indexOf(group) >= 0) {
+          this.addList.permissionData[group].isIndeterminate = true
+          perms.forEach(tmp => {
+            if (tmp.indexOf(group) >= 0 && tmp !== group) {
+              this.addList.permissions[group].push(tmp)
+            }
+          })
+        }
+      }
     },
     // 表格删除
     handleDelete(row) {
@@ -340,9 +352,18 @@ export default {
     editAccountList(formName) {
       this.$refs[formName].validate(valid => {
         if (valid) {
-          // console.log('data', this.addList)
-          // console.log('permissions', this.addList.permissions)
-          // sessionStorage.setItem('Roledata', JSON.stringify(this.addList))
+          var data = this.getData()
+          // console.log('data', data)
+
+          updateRole(data).then(res => {
+            if (res.code === 1) {
+              this.$message.success(res.message)
+              this.getQueryList()
+              this.addPopup = false
+            } else {
+              this.$message.error(res.message)
+            }
+          })
           // this.getQueryList()
           // this.addPopup = false
         } else {
@@ -353,7 +374,7 @@ export default {
 
     // 表格渲染
     getQueryList() {
-      getRoleInfoList().then(res => {
+      getRoleInfoList({ roleName: this.queryValue.name }).then(res => {
         if (res.code === 1) {
           this.tableData = res.data
         }
