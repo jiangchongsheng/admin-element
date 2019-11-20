@@ -9,7 +9,7 @@ const service = axios.create({
   baseURL: process.env.BASE_API, // 配置得前缀
   timeout: 120000, // 请求超时时间
   crossDomain: true,
-  withCredentials: true,
+  withCredentials: false,
   transformRequest: [function(data) {
     return Qs.stringify(data, { allowDots: true })
   }],

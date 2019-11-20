@@ -32,16 +32,64 @@ app.use(bodyParser.urlencoded({ extended: false })) // 表单请求
 const conn = mysql.createConnection(option)
 
 // all代表所有的请求方式(包括get/post)  '/user' 给一个路径(自己定义)  req代表发起请求(request)   res代表接收请求(response)
-// app.all('/user',(req,res)=>{
-//     console.log(req);
-//     // 选择user表 根据你自己的表名  用json的格式输出
-// 	conn.query('SELECT * From user_info',(err,result)=>res.json(result))
-// })
+app.all('*', (req, res, next) => {
+  res.header('Access-Control-Allow-Origin', '*')
+  res.header('Access-Control-Allow-Headers', 'X-Requested-With')
+  res.header('Access-Control-Allow-Methods', 'PUT,POST,GET,DELETE,OPTIONS')
+  res.header('X-Powered-By', ' 3.2.1')
+  res.header('Content-Type', 'application/json;charset=utf-8')
+  next()
+})
+
+// 登录
+app.get('/api/login', (req, res) => {
+  const name = req.query.username
+  const password = req.query.password
+  const sqlStr = 'select * from user_info where userName = ?'
+  conn.query(sqlStr, name, (err, results) => {
+    if (err) {
+      return res.json({ code: 0, message: '用户名不存在或密码错误', affectedRows: 0 })
+    } else {
+      var isTrue = false
+      var data = {}
+      for (var i = 0; i < results.length; i++) {
+        if (results[i].userName == name && results[i].password == password) {
+          isTrue = true
+          data = results[i]
+        }
+      }
+      if (isTrue) {
+        res.json({
+          code: 1, message: '登陆成功', data: data, affectedRows: 0
+        })
+      } else {
+        return res.json({ code: 0, message: '用户名不存在或密码错误', affectedRows: 0 })
+      }
+    }
+  })
+})
+
+// 根据name查询角色信息
+app.get('/api/getRoleInfo', (req, res) => {
+  const name = req.query.roleName
+  const sqlStr = 'select * from role_info where roleName = ?'
+  conn.query(sqlStr, name, (err, results) => {
+    if (err) {
+      return res.json({ code: 0, message: '获取数据失败', affectedRows: 0 })
+    } else if (results.length !== 1) {
+      return res.json({ code: 0, message: '数据不存在', affectedRows: 0 })
+    } else {
+      res.json({
+        code: 1, message: '获取成功', data: results[0], affectedRows: 0
+      })
+    }
+  })
+})
 
 // 角色列表信息
 app.get('/api/getRoleInfoList', (req, res) => {
   // DESC(倒序，ASC正序(默认)
-  const sqlRole = `SELECT * FROM role_info WHERE roleName LIKE '${req.query.roleName}%' Order By creationTime Desc`
+  const sqlRole = `SELECT * FROM role_info WHERE roleName LIKE '%${req.query.roleName}%' Order By creationTime Desc`
 
   conn.query(sqlRole, (err, results) => {
     if (err) {

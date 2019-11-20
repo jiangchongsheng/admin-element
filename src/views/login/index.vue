@@ -88,23 +88,18 @@ export default {
         if (valid) {
           this.loading = true
           // this.loginForm.password = md5(md5(this.loginForm.password) + 'asset') 密码加密
-
           // 登录 进去 调接口 缓存存token 存vuex token
-          // this.$store.dispatch('Login', this.loginForm).then(() => {
-          //   this.loading = false
-          //   this.$router.push({ path: '/' })
-          // }).catch((error) => {
-          //   this.loading = false
-          //   this.$message({
-          //     showClose: true,
-          //     message: error,
-          //     type: 'error'
-          //   })
-          // })
-
-          // 无后台，前端token
-          setToken('123456789')
-          this.$router.push({ path: '/' })
+          this.$store.dispatch('Login', this.loginForm).then(() => {
+            this.loading = false
+            this.$router.push({ path: '/' })
+          }).catch((error) => {
+            this.loading = false
+            this.$message({
+              showClose: true,
+              message: error,
+              type: 'error'
+            })
+          })
         } else {
           console.log('error submit!!')
           return false

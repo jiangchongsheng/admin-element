@@ -1,5 +1,4 @@
-// import { login, logout, getInfo } from '@/api/login'
-import { login, logout } from '@/api/login'
+import { login, logout, getInfo } from '@/api/login'
 import { getToken, setToken, removeToken } from '@/utils/auth'
 
 const user = {
@@ -31,13 +30,14 @@ const user = {
       const username = userInfo.username.trim()
       return new Promise((resolve, reject) => {
         login(username, userInfo.password).then(response => {
-          console.log(response);
+          console.log(response)
           const data = response
-          if (data.code !== '0000') { // 不等于失败状态
-            reject(data.msg)
+          if (data.code !== 1) { // 不等于失败状态
+            reject(data.message)
           } else {
-            commit('SET_TOKEN', data.data)
-            setToken(data.data)
+            // 暂无token
+            commit('SET_TOKEN', data.data.role)
+            setToken(data.userName)
             resolve()
           }
         }).catch(error => {
@@ -50,43 +50,44 @@ const user = {
     GetInfo({ commit, state }) {
       return new Promise((resolve, reject) => {
         // 假值============ 默认给权限 admin==============
-        const arr = ['admin']
-        commit('SET_ROLES', arr)
-        resolve(arr)
+        // const arr = ['admin']
+        // commit('SET_ROLES', arr)
+        // resolve(arr)
         // 假值============ 默认给权限 admin==============
 
-        // getInfo(state.token).then(response => {
-        //   console.log(response)
-        //   const data = response.data
-        //   localStorage.setItem('userId', data.userId)
-        //   localStorage.setItem('roleName', data.roleName)
-        //   // switch (data.role) {
-        //   //   case 0:
-        //   //     commit('SET_ROLES', ['admin'])
-        //   //     break
-        //   //   case 1:
-        //   //     commit('SET_ROLES', ['input'])
-        //   //     break
-        //   //   case 2:
-        //   //     commit('SET_ROLES', ['manage'])
-        //   //     break
-        //   //   case 3:
-        //   //     commit('SET_ROLES', ['base'])
-        //   //     break
-        //   //   case 4:
-        //   //     commit('SET_ROLES', ['detail'])
-        //   //     break
-        //   //   case 5:
-        //   //     commit('SET_ROLES', ['none'])
-        //   //     break
-        //   // }
-        //   commit('SET_ROLES', data.permissions)
-        //   commit('SET_NAME', data.name)
-        //   commit('SET_AVATAR', data.avatar)
-        //   resolve(response)
-        // }).catch(error => {
-        //   reject(error)
-        // })
+        getInfo({ roleName: state.token }).then(response => {
+          const data = response.data
+
+          commit('SET_ROLES', [data.role])
+          // localStorage.setItem('userId', data.userId)
+          // localStorage.setItem('roleName', data.roleName)
+          // switch (data.role) {
+          //   case 0:
+          //     commit('SET_ROLES', ['admin'])
+          //     break
+          //   case 1:
+          //     commit('SET_ROLES', ['input'])
+          //     break
+          //   case 2:
+          //     commit('SET_ROLES', ['manage'])
+          //     break
+          //   case 3:
+          //     commit('SET_ROLES', ['base'])
+          //     break
+          //   case 4:
+          //     commit('SET_ROLES', ['detail'])
+          //     break
+          //   case 5:
+          //     commit('SET_ROLES', ['none'])
+          //     break
+          // }
+          // commit('SET_ROLES', data.perms)
+          // commit('SET_NAME', data.name)
+          // commit('SET_AVATAR', data.avatar)
+          resolve(response)
+        }).catch(error => {
+          reject(error)
+        })
       })
     },
 
