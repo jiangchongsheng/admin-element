@@ -37,7 +37,7 @@ const user = {
           } else {
             // 暂无token
             commit('SET_TOKEN', data.data.role)
-            setToken(data.userName)
+            setToken(data.data.role)
             resolve()
           }
         }).catch(error => {
@@ -58,7 +58,8 @@ const user = {
         getInfo({ roleName: state.token }).then(response => {
           const data = response.data
 
-          commit('SET_ROLES', [data.role])
+          commit('SET_ROLES', [data.roleName])
+
           // localStorage.setItem('userId', data.userId)
           // localStorage.setItem('roleName', data.roleName)
           // switch (data.role) {
@@ -94,14 +95,14 @@ const user = {
     // 登出
     LogOut({ commit, state }) {
       return new Promise((resolve, reject) => {
-        logout(state.token).then(() => {
-          commit('SET_TOKEN', '')
-          commit('SET_ROLES', [])
-          removeToken()
-          resolve()
-        }).catch(error => {
-          reject(error)
-        })
+        // logout(state.token).then(() => {
+        commit('SET_TOKEN', '')
+        commit('SET_ROLES', [])
+        removeToken()
+        resolve()
+        // }).catch(error => {
+        //   reject(error)
+        // })
       })
     },
 

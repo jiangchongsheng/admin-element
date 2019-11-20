@@ -42,11 +42,13 @@
           <!-- v-if="hasPermission('role:update')" -->
           <el-button
             size="mini"
+            v-if="scope.row.roleName !== 'admin'"
             @click="handleEdit(scope.row)">编辑
           </el-button>
           <!-- v-if="hasPermission('role:delete')" -->
           <el-button
             size="mini"
+            v-if="scope.row.roleName !== 'admin'"
             type="danger"
             @click="handleDelete(scope.row)">删除
           </el-button>
