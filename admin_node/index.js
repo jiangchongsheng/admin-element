@@ -45,7 +45,7 @@ app.all('*', (req, res, next) => {
 app.get('/api/login', (req, res) => {
   const name = req.query.username
   const password = req.query.password
-  const sqlStr = 'select * from user_info where userName = ?'
+  const sqlStr = 'select * from user_info where user = ?'
   conn.query(sqlStr, name, (err, results) => {
     if (err) {
       return res.json({ code: 0, message: '用户名不存在或密码错误', affectedRows: 0 })
@@ -53,7 +53,7 @@ app.get('/api/login', (req, res) => {
       var isTrue = false
       var data = {}
       for (var i = 0; i < results.length; i++) {
-        if (results[i].userName == name && results[i].password == password) {
+        if (results[i].user == name && results[i].password == password) {
           isTrue = true
           data = results[i]
         }

@@ -37,6 +37,7 @@ const user = {
           } else {
             // 暂无token
             commit('SET_TOKEN', data.data.role)
+            commit('SET_NAME', data.data.userName)
             setToken(data.data.role)
             resolve()
           }
