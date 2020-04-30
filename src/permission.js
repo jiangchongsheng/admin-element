@@ -35,7 +35,7 @@ router.beforeEach((to, from, next) => {
           //   case 1:
           //     roles = ['input']
           //     break
-          roles = [res.data.roleName]
+          roles = res.data.perms.split(',')
 
           store.dispatch('GenerateRoutes', { roles }).then(() => { // 生成可访问的路由表
             // console.log('123123', store.getters.addRouters)

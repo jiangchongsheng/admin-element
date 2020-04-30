@@ -52,11 +52,11 @@ const permission = {
         const { roles } = data
         console.log('roles', roles)
         let accessedRouters
-        console.log('asyncRouterMap', asyncRouterMap)
         if (roles.includes('admin')) { // 权限admin 所有
           accessedRouters = asyncRouterMap
         } else {
           accessedRouters = filterAsyncRouter(asyncRouterMap, roles)
+          console.log('asyncRouterMap', asyncRouterMap)
         }
         commit('SET_ROUTERS', accessedRouters)
         resolve()

@@ -2,7 +2,7 @@ import request from '@/utils/request'
 // 用户列表
 export function userList(query) {
   return request({
-    url: '/user',
+    url: '/api/getUserInfoList',
     method: 'get',
     data: query
   })

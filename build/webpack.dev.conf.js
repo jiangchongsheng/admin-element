@@ -43,7 +43,12 @@ const devWebpackConfig = merge(baseWebpackConfig, {
     // 重新加载server,控制台以warning方式提示错误
     // 使用内联模式时，在开发工具的控制台将显示消息，可取的值有none error warning info
     clientLogLevel: 'warning',
+    // 本来
     historyApiFallback: true,
+    // history模式下的url会请求到服务器端，但是服务器端并没有这一个资源文件，就会返回404，所以需要配置这一项
+    // historyApiFallback: {
+    //   index: '/index.html' //与output的publicPath有关(HTMLplugin生成的html默认为index.html)
+    // },
     // 启用热替换 这个功能主要是用于开发过程中，对生产环境无帮助。效果上就是界面无刷新更新。
     hot: true,
     // 告诉服务器从哪里提供内容，只有在你想要提供静态文件时才需要，这里是禁用

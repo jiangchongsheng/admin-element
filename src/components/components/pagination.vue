@@ -4,7 +4,7 @@
     <slot/>
     <el-pagination
       :current-page="queryData.pageNum"
-      :page-sizes="[10, 20, 30, 40]"
+      :page-sizes="[5, 10, 20, 30, 40]"
       :page-size="queryData.pageRows"
       :total="total"
       style="margin:20px;text-align:right"
@@ -27,7 +27,7 @@ export default {
     return {
       queryData: {
         pageNum: 1, // 页
-        pageRows: 10 // 条
+        pageRows: 5 // 条
       }
     }
   },

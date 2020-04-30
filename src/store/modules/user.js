@@ -59,7 +59,7 @@ const user = {
         getInfo({ roleName: state.token }).then(response => {
           const data = response.data
 
-          commit('SET_ROLES', [data.roleName])
+          commit('SET_ROLES', data.perms.split(','))
 
           // localStorage.setItem('userId', data.userId)
           // localStorage.setItem('roleName', data.roleName)
