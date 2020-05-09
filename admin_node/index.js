@@ -74,8 +74,9 @@ app.get('/api/getUserInfoList', (req, res) => {
   // DESC(倒序，ASC正序(默认)
   let n = +req.query.currentPage
   let s = req.query.pageSize
-  const sqlAllRole = `SELECT * FROM role_info`
-  const sqlRole = `SELECT * FROM role_info WHERE userName LIKE '%${req.query.userName}%' Order By creationTime Desc LIMIT ${(n - 1) * s},${s}`
+  const sqlAllRole = `SELECT * FROM user_info`
+  const sqlRole = `SELECT * FROM user_info WHERE userName LIKE '%${req.query.userName}%' Order By creationTime Desc LIMIT ${(n - 1) * s},${s}`
+  console.log(sqlRole)
   // 查所有
   conn.query(sqlAllRole, (err1, results1) => {
     if (err1) {
@@ -83,9 +84,10 @@ app.get('/api/getUserInfoList', (req, res) => {
     } else {
       let total = results1.length || 0
       conn.query(sqlRole, (err2, results2) => {
-        if (err1) {
+        if (err2) {
           return res.json({ code: 0, message: '获取数据失败', affectedRows: 0 })
         } else {
+          console.log(results2)
           res.json({
             code: 1, message: '获取成功', total: total, data: results2, affectedRows: 0
           })
@@ -131,7 +133,7 @@ app.get('/api/getRoleInfoList', (req, res) => {
     } else {
       let total = results1.length || 0
       conn.query(sqlRole, (err2, results2) => {
-        if (err1) {
+        if (err2) {
           return res.json({ code: 0, message: '获取数据失败', affectedRows: 0 })
         } else {
           res.json({
@@ -192,7 +194,6 @@ app.post('/api/addRole', (req, res) => {
       })
     }
   })
-
 })
 
 // 修改 (name 不能重复)

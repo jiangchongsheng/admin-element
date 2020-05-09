@@ -2,7 +2,7 @@
   <div>
     <div class="headQuery">
       <span>用户名称：</span>
-      <el-input v-model.trim="queryValue.name" placeholder="请选择姓名" class="txtStyle"/>
+      <el-input v-model.trim="queryValue.userName" placeholder="请选择姓名" class="txtStyle"/>
 
       <el-button type="primary" size="small" @click="querybtn">查询</el-button>
     </div>
@@ -11,7 +11,7 @@
       <el-button type="primary" size="small" @click="addAnAccount">添加用户</el-button>
     </div>
 
-    <pagination :total="100" @get-data="getPageData">
+    <pagination :total="queryValue.total" @get-data="getPageData">
       <el-table
         v-loading="loading"
         :data="tableData"
@@ -35,7 +35,7 @@
         </el-table-column>
         <el-table-column class-name="status-col" label="状态" align="center">
           <template slot-scope="scope">
-            <el-tag>{{ scope.row.status }}</el-tag>
+            <el-tag>{{ scope.row.status | statusFiler }}</el-tag>
           </template>
         </el-table-column>
         <el-table-column label="创建时间" align="center" min-width="200">
@@ -56,6 +56,55 @@
       </el-table>
     </pagination >
 
+    <!-- 弹出框 S -->
+    <el-dialog :visible.sync="addPopup" :title="textMap[dialogStatus]" @closed="dialogClose">
+
+
+      <el-form
+        ref="addList"
+        :model="addList"
+        label-position="right"
+        label-width="120px"
+        style="margin-left:50px;margin-top: 20px;">
+
+        <el-form-item label="用户名称">
+          <el-input v-model.trim="addList.userName" class="testStyle"/>
+        </el-form-item>
+
+        <el-form-item label="用户账号">
+          <el-input v-model.trim="addList.user" class="testStyle"/>
+        </el-form-item>
+
+        <el-form-item label="用户密码">
+          <el-input v-model.trim="addList.password" placeholder="请输入密码" show-password class="testStyle"/>
+        </el-form-item>
+
+        <el-form-item label="角色">
+          <el-input v-model.trim="addList.role" class="testStyle"/>
+        </el-form-item>
+
+        <el-form-item label="是否启用">
+          <el-switch
+            v-model="addList.status"
+            active-color="#13ce66"
+            inactive-color="#ff4949"
+            active-value="1"
+            inactive-value="2">
+          </el-switch>
+        </el-form-item>
+
+      </el-form>
+
+      <div slot="footer" class="dialog-footer">
+        <el-button class="pan-btn tiffany-btn" @click="addPopup = false">取 消</el-button>
+        <el-button v-if="dialogStatus == 'create'" class="pan-btn tiffany-btn" @click="addAccountList('addList')">确 定
+        </el-button>
+        <el-button v-else class="pan-btn tiffany-btn" @click="editAccountList('addList')">确 定</el-button>
+
+      </div>
+    </el-dialog>
+    <!-- 弹出框 E -->
+
   </div>
 
 </template>
@@ -69,7 +118,11 @@ export default {
   filters: {
     dateFiler(value) {
       return value? moment(value).format('YYYY-MM-DD HH:mm:ss') : "-"
+    },
+    statusFiler(value) {
+      return value === 1? '启用':'禁用'
     }
+
   },
   data() {
     return {
@@ -78,16 +131,38 @@ export default {
         currentPage: 1,
         pageSize: 5,
         total: 0,
-        roleName: ''
+        userName: ''
       },
       loading: false,
-      tableData: []
+      tableData: [],
+
+      active: 0,
+      addList: {
+        userName: '',
+        user: '',
+        password: '',
+        status: '1',
+        role: ''
+      },
+
+      textMap: {
+        update: '编辑',
+        create: '添加'
+      },
+      dialogStatus: '',
+      addPopup: false
     }
   },
   created() {
     this.getQueryList()
   },
   methods: {
+    dialogClose() {
+
+    },
+    addAccountList () {
+
+    },
     // 分页
     getPageData(obj) {
       this.queryValue.currentPage = obj.pageNum
@@ -100,8 +175,8 @@ export default {
     },
     // 添加btn
     addAnAccount() {
-      // this.dialogStatus = 'create'
-      // this.addPopup = true
+      this.dialogStatus = 'create'
+      this.addPopup = true
     },
     // 表格渲染
     getQueryList() {

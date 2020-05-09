@@ -4,7 +4,7 @@ export function userList(query) {
   return request({
     url: '/api/getUserInfoList',
     method: 'get',
-    data: query
+    params: query
   })
 }
 
