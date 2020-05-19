@@ -16,6 +16,7 @@ import App from './App'
 import router from './router'
 import store from './store'
 import moment from 'moment'
+// import BaiduMap from 'vue-baidu-map'
 
 import '@/icons' // icon
 import '@/permission' // permission control
@@ -25,6 +26,11 @@ Vue.use(ElementUI, { i18n: (key, value) => i18n.t(key, value) })
 Vue.use(CustComponents)
 
 Vue.use(VueClipboards)
+
+// Vue.use(BaiduMap, {
+//   /* 需要注册百度地图开发者来获取你的ak */
+//   ak: '87nNWmzP1Sj6R6DgL8HseKOtgHsZk5nL'
+// })
 
 Vue.config.productionTip = false
 

@@ -8,6 +8,51 @@ export function userList(query) {
   })
 }
 
+// 新增用户
+export function addUser(query) {
+  return request({
+    url: '/api/addUser',
+    method: 'post',
+    data: query
+  })
+}
+
+// 编辑用户
+export function updateUser(query) {
+  return request({
+    url: '/api/updateUser',
+    method: 'post',
+    data: query
+  })
+}
+
+// 角色下拉框
+export function selectRole(query) {
+  return request({
+    url: '/api/getSelectRole',
+    method: 'get',
+    params: query
+  })
+}
+
+// 删除用户
+export function delUser(query) {
+  return request({
+    url: '/api/delUser',
+    method: 'get',
+    params: query
+  })
+}
+
+// 根据id查询用户详情
+export function getUserDetails(query) {
+  return request({
+    url: '/api/getUserDetails',
+    method: 'get',
+    params: query
+  })
+}
+
 // 用户管理 S
 // 编辑用户信息
 export function update(query) {
@@ -31,14 +76,6 @@ export function fetchList(query) {
 export function add(query) {
   return request({
     url: 'admin/user/add',
-    method: 'post',
-    data: query
-  })
-}
-
-export function del(query) {
-  return request({
-    url: 'admin/user/delete',
     method: 'post',
     data: query
   })

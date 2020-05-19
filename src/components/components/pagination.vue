@@ -15,12 +15,17 @@
   </div>
 </template>
 <script>
+import { scrollTo } from '@/utils/scroll-to'
 export default {
   name: 'Pagination',
   props: {
     total: { // 默认总数
       type: Number,
       default: 100
+    },
+    autoScroll: { // 分页后是否自动滚动到顶部
+      type: Boolean,
+      default: true
     }
   },
   data() {
@@ -42,12 +47,18 @@ export default {
         pageNum: 1, // 避免bug
         pageRows: val
       }
+      if (this.autoScroll) {
+        scrollTo(0, 800)
+      }
       this.$emit('get-data', this.queryData)
     },
     // 页数
     handleCurrentChange(val) {
       // console.log(`当前页: ${val}`)
       this.queryData.pageNum = val
+      if (this.autoScroll) {
+        scrollTo(0, 800)
+      }
       this.$emit('get-data', this.queryData)
     }
 

@@ -1,12 +1,14 @@
 import { login, logout, getInfo } from '@/api/login'
 import { getToken, setToken, removeToken } from '@/utils/auth'
+import md5 from 'js-md5'
 
 const user = {
   state: {
     token: getToken(),
     name: '',
     avatar: '',
-    roles: []
+    roles: [],
+    userInfo: {}
   },
 
   mutations: {
@@ -21,6 +23,9 @@ const user = {
     },
     SET_ROLES: (state, roles) => {
       state.roles = roles
+    },
+    SET_USER_INFOT: (state, userInfo) => {
+      state.userInfo = userInfo
     }
   },
 
@@ -28,9 +33,10 @@ const user = {
     // 登录
     Login({ commit }, userInfo) {
       const username = userInfo.username.trim()
+      const password = md5(md5(userInfo.password) + 'asset') // 密码加密
       return new Promise((resolve, reject) => {
-        login(username, userInfo.password).then(response => {
-          console.log(response)
+        login(username, password).then(response => {
+          // console.log('12312', response)
           const data = response
           if (data.code !== 1) { // 不等于失败状态
             reject(data.message)
@@ -38,6 +44,7 @@ const user = {
             // 暂无token
             commit('SET_TOKEN', data.data.role)
             commit('SET_NAME', data.data.userName)
+            commit('SET_USER_INFOT', data.data)
             setToken(data.data.role)
             resolve()
           }

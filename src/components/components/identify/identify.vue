@@ -8,7 +8,6 @@
   </div>
 </template>
 <script>
-// 使用 注：v-model内值全为小写
 // <identify v-model="content"/>
 export default {
   name: 'SIdentify',
@@ -47,12 +46,26 @@ export default {
     contentHeight: { // 容器高度
       type: Number,
       default: 38
+    },
+    toLowerCase: { // 小写
+      type: Boolean,
+      default: false
+    },
+    toUpperCase: { // 大写
+      type: Boolean,
+      default: false
+    },
+    showContent: { // 展示的内容
+      type: String,
+      default: '0123456789abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ'
+    },
+    length: { // 随机几位数
+      type: Number,
+      default: 4
     }
   },
   data() {
     return {
-      // 展示的内容
-      showContent: '0123456789abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ',
       identifyCode: '1232'
     }
   },
@@ -70,16 +83,20 @@ export default {
     changeCode() {
       this.identifyCode = ''
 
-      for (let i = 0; i < 4; i++) {
-        // this.identifyCode += this.randomNum(0, 10) // 0 - 9
-        this.identifyCode += this.showContent[this.randomNum(0, this.showContent.length)] // 0 - 9
+      for (let i = 0; i < this.length; i++) {
+        this.identifyCode += this.showContent[this.randomNum(0, this.showContent.length)]
       }
 
-      console.log('值', this.identifyCode)
+      // console.log('值', this.identifyCode)
       // toUpperCase()：把字符串转换为大写；
       // toLowerCase() ：把字符串转换为小写
-
-      this.$emit('input', this.identifyCode.toLowerCase())
+      if (this.toLowerCase) {
+        this.$emit('input', this.identifyCode.toLowerCase())
+      } else if (this.toUpperCase) { 
+        this.$emit('input', this.identifyCode.toUpperCase())
+      } else {
+        this.$emit('input', this.identifyCode)
+      }
     },
 
     // 生成一个随机数
@@ -123,7 +140,7 @@ export default {
     },
     drawLine(ctx) {
       // 绘制干扰线
-      for (let i = 0; i < 4; i++) {
+      for (let i = 0; i < this.length; i++) {
         ctx.strokeStyle = this.randomColor(100, 200)
         ctx.beginPath()
         ctx.moveTo(this.randomNum(0, this.contentWidth), this.randomNum(0, this.contentHeight))

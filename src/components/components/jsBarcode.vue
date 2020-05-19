@@ -1,6 +1,6 @@
 <template>
   <div>
-    <img :id="refId" >
+    <img :id="id" >
   </div>
 </template>
 <script>
@@ -8,12 +8,12 @@
 import JsBarcode from 'jsbarcode'
 
 // 使用  内容 123245
-// <js-barcode refId="barcodeId" content="123245"></js-barcode>
+// <js-barcode id="barcodeId" content="123245"></js-barcode>
 
 export default {
   name: 'JsBarcode',
   props: {
-    refId: {
+    id: {
       type: String,
       default: function() {
         return 'refid'

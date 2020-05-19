@@ -13,58 +13,60 @@
     </div>
 
     <!-- 表格 -->
-    <pagination :total="queryValue.total" @get-data="getPageData">
-      <el-table
-        v-loading="loading"
-        :data="tableData"
-        element-loading-text="Loading"
-        highlight-current-row
-        style="width:100%; margin-left:40px"
-        border>
-        <el-table-column
-          type="index"
-          label="序号"
-          align="center"
-          width="120"/>
-        <el-table-column
-          prop="roleName"
-          label="角色名称"
-          align="center"
-          min-width="200"/>
-        <el-table-column label="创建时间" align="center" min-width="200">
-          <template slot-scope="scope">
-            <span>{{ scope.row.creationTime | dateFiler }}</span>
-          </template>
-        </el-table-column>
-        <el-table-column label="更新时间" align="center" min-width="200">
-          <template slot-scope="scope">
-            <span>{{ scope.row.updateTime | dateFiler }}</span>
-          </template>
-        </el-table-column>
-        <el-table-column
-          prop="roleDescription"
-          label="角色描述"
-          align="center"
-          min-width="200"/>
-        <el-table-column label="操作" min-width="200" align="center">
-          <template slot-scope="scope">
-            <!-- v-if="hasPermission('role:update')" -->
-            <el-button
-              v-if="scope.row.roleName !== 'admin'"
-              size="mini"
-              @click="handleEdit(scope.row)">编辑
-            </el-button>
-            <!-- v-if="hasPermission('role:delete')" -->
-            <el-button
-              v-if="scope.row.roleName !== 'admin'"
-              size="mini"
-              type="danger"
-              @click="handleDelete(scope.row)">删除
-            </el-button>
-          </template>
-        </el-table-column>
-      </el-table>
-    </pagination>
+    <div style="padding: 0 40px">
+      <pagination :total="queryValue.total" @get-data="getPageData">
+        <el-table
+          v-loading="loading"
+          :data="tableData"
+          element-loading-text="Loading"
+          highlight-current-row
+          style="width:100%;"
+          border>
+          <el-table-column
+            type="index"
+            label="序号"
+            align="center"
+            width="120"/>
+          <el-table-column
+            prop="roleName"
+            label="角色名称"
+            align="center"
+            min-width="200"/>
+          <el-table-column label="创建时间" align="center" min-width="200">
+            <template slot-scope="scope">
+              <span>{{ scope.row.creationTime | dateFiler }}</span>
+            </template>
+          </el-table-column>
+          <el-table-column label="更新时间" align="center" min-width="200">
+            <template slot-scope="scope">
+              <span>{{ scope.row.updateTime | dateFiler }}</span>
+            </template>
+          </el-table-column>
+          <el-table-column
+            prop="roleDescription"
+            label="角色描述"
+            align="center"
+            min-width="200"/>
+          <el-table-column label="操作" min-width="200" align="center">
+            <template slot-scope="scope">
+              <!-- v-if="hasPermission('role:update')" -->
+              <el-button
+                v-if="scope.row.roleName !== 'admin'"
+                size="mini"
+                @click="handleEdit(scope.row)">编辑
+              </el-button>
+              <!-- v-if="hasPermission('role:delete')" -->
+              <el-button
+                v-if="scope.row.roleName !== 'admin'"
+                size="mini"
+                type="danger"
+                @click="handleDelete(scope.row)">删除
+              </el-button>
+            </template>
+          </el-table-column>
+        </el-table>
+      </pagination>
+    </div>
 
     <!-- 弹出框 S -->
     <el-dialog :visible.sync="addPopup" :title="textMap[dialogStatus]" @closed="dialogClose">
@@ -133,7 +135,7 @@ import moment from 'moment'
 export default {
   filters: {
     dateFiler(value) {
-      return value? moment(value).format('YYYY-MM-DD HH:mm:ss') : "-"
+      return value ? moment(value).format('YYYY-MM-DD HH:mm:ss') : '-'
     }
   },
   data() {
@@ -166,7 +168,7 @@ export default {
       },
 
       tableData: [],
-      queryValue: {   
+      queryValue: {
         currentPage: 1,
         pageSize: 5,
         total: 0,
@@ -400,7 +402,7 @@ export default {
           this.queryValue.total = res.total || 0
           this.tableData = res.data
         }
-      }).catch(e => { 
+      }).catch(e => {
         this.loading = false
       })
     }

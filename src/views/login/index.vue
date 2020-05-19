@@ -54,7 +54,7 @@
 
 <script>
 // import md5 from 'js-md5'
-import { setToken } from '@/utils/auth' // 现存一下
+// import { setToken } from '@/utils/auth' // 现存一下
 export default {
   name: 'Login',
   data() {
@@ -87,12 +87,15 @@ export default {
       this.$refs.loginForm.validate(valid => {
         if (valid) {
           this.loading = true
-          // this.loginForm.password = md5(md5(this.loginForm.password) + 'asset') 密码加密
+          // const pas = this.loginForm.password
+          // this.loginForm.password = md5(md5(this.loginForm.password) + 'asset') // 密码加密
           // 登录 进去 调接口 缓存存token 存vuex token
           this.$store.dispatch('Login', this.loginForm).then(() => {
+            // this.loginForm.password = pas
             this.loading = false
             this.$router.push({ path: '/' })
           }).catch((error) => {
+            // this.loginForm.password = pas
             this.loading = false
             this.$message({
               showClose: true,

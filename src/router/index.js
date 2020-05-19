@@ -78,7 +78,7 @@ export const asyncRouterMap = [
     component: Layout,
     redirect: 'role/index',
     meta: {
-      roles: ['input','role'],
+      roles: ['input', 'role'],
       title: 'role',
       icon: 'jiaose'
     },
@@ -90,6 +90,30 @@ export const asyncRouterMap = [
         meta: {
           roles: ['input', 'role'],
           title: 'role',
+          icon: 'jiaose'
+        }
+      }
+    ]
+  },
+
+  // 地图管理
+  {
+    path: '/map',
+    component: Layout,
+    redirect: 'map/index',
+    meta: {
+      roles: ['input', 'map'],
+      title: 'map',
+      icon: 'jiaose'
+    },
+    children: [
+      {
+        path: 'map',
+        component: () => import('@/views/map/index'),
+        name: 'index',
+        meta: {
+          roles: ['input', 'map'],
+          title: 'map',
           icon: 'jiaose'
         }
       }

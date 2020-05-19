@@ -9,7 +9,6 @@
 </template>
 
 <script>
-// 示例  <copy-msg :msg="我是复制的内容"/>
 export default {
   props: {
     // 需要复制德内容
