@@ -2,6 +2,7 @@
 
 v-model	           |  String  |  值
 length             |  Number  |  随机几位数(默认4)
+click              |  Boolean |  点击组件自动切换(默认true)
 fontSizeMin        |  Number  |  字体最小值(默认25)
 fontSizeMax        |  Number  |  字体最大值(默认35)
 backgroundColorMin |  Number  |  验证码图片背景色最小值(默认200)

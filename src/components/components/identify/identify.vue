@@ -1,6 +1,6 @@
 <template>
   <!-- 图片验证码展示 4位 随机数字字母 -->
-  <div class="s-canvas" @click="changeCode">
+  <div class="s-canvas" @click="clickCode">
     <canvas
       id="s-canvas"
       :width="contentWidth"
@@ -62,6 +62,12 @@ export default {
     length: { // 随机几位数
       type: Number,
       default: 4
+    },
+    click: {
+      type: Boolean,
+      default: () => {
+        return true
+      }
     }
   },
   data() {
@@ -79,6 +85,11 @@ export default {
     this.drawPic()
   },
   methods: {
+    clickCode() {
+      if (this.click) {
+        this.changeCode()
+      }
+    },
     // 点击事件
     changeCode() {
       this.identifyCode = ''
