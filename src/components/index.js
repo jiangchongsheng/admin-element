@@ -6,7 +6,7 @@ export default {
     Vue.component('pagination', () => import('./components/pagination.vue')) // 分页
 
     Vue.component('verification-code', () => import('./components/verificationCode.vue')) // 手机获取验证码
-    Vue.component('qr-code', () => import('./components/qrCode.vue')) // 二维码
+    Vue.component('qr-code', () => import('./components/qrCode/qrCode.vue')) // 二维码
     Vue.component('js-barcode', () => import('./components/jsBarcode.vue')) // 条形码
 
     Vue.component('my-chart-china', () => import('./components/myChartChina.vue')) // echarts 中国地图

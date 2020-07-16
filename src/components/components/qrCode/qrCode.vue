@@ -7,8 +7,6 @@
 
 import VueQr from 'vue-qr'
 
-// 示例 <qr-code value="我是扫描出来的值"/>
-
 export default {
   name: 'SIdentify',
   components: {
@@ -33,14 +31,6 @@ export default {
       // default: 'https://wpimg.wallstcn.com/f778738c-e4f8-4870-b634-56703b4acafe.gif?imageView2/1/w/80/h/80'
       default: ''
     }
-    // ColorDark: { // 实点颜色
-    //   type: String,
-    //   default: ''
-    // },
-    // ColorLight: { // 空白颜色
-    //   type: String,
-    //   default: ''
-    // }
   },
   data() {
     return {
