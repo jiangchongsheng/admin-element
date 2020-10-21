@@ -16,11 +16,11 @@ app.listen('8088', () => console.log('服务启动'))
 // 数据库信息，密码一般，默认root，我是修改过
 const option = {
   // host: 'localhost',
-  host: '106.54.221.145',
+  host: '47.94.154.224',
   user: 'root',
-  password: '123456',
+  password: 'zxcvbnm123.',
   port: '3306',
-  database: 'jiang', // 改成你的数据库名称
+  database: 'csjianga', // 改成你的数据库名称
   connectTimeout: 5000, // 连接超时
   multipleStatements: false // 是否允许一个query中包含多条sql语句
 }
@@ -43,7 +43,7 @@ app.all('*', (req, res, next) => {
 })
 
 // 登录
-app.get('/api/login', (req, res) => {
+app.get('/api/login', (req, res) => {  
   const name = req.query.username
   const password = req.query.password
   const sqlStr = 'select * from user_info where user = ?'

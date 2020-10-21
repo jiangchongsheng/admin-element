@@ -13,7 +13,7 @@
               style="font-family:'SimHei';"
               class="tr-sick"
             >
-              <td v-for="(item1, index1) in columns" :key="index1">{{ item1.prop }}</td>
+              <td v-for="(item1, index1) in columns" :key="index1">{{ item.prop }}</td>
             </tr>
             <tr v-if="tableList.length === 0" class="tr-sick">
               <td colspan="4" style="text-align:center;color:#ccc">暂无数据</td>
