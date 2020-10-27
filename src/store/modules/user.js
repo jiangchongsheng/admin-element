@@ -8,7 +8,7 @@ const user = {
     name: '',
     avatar: '',
     roles: [],
-    userInfo: {}
+    userInfo: []
   },
 
   mutations: {
@@ -36,17 +36,26 @@ const user = {
       const password = md5(md5(userInfo.password) + 'asset') // 密码加密
       return new Promise((resolve, reject) => {
         login(username, password).then(response => {
-          // console.log('12312', response)
-          const data = response
-          if (data.code !== 1) { // 不等于失败状态
-            reject(data.message)
-          } else {
-            // 暂无token
-            commit('SET_TOKEN', data.data.role)
-            commit('SET_NAME', data.data.userName)
-            commit('SET_USER_INFOT', data.data)
-            setToken(data.data.role)
+          // const data = response
+          // if (data.code !== 1) { // 不等于失败状态
+          //   reject(data.message)
+          // } else {
+          //   // 暂无token
+          //   commit('SET_TOKEN', data.data.role)
+          //   commit('SET_NAME', data.data.userName)
+          //   commit('SET_USER_INFOT', data.data)
+           
+          //   resolve()
+          // }
+          // console.log(response, 'response');
+          if (response.code) {
+            commit('SET_TOKEN', response.token)
+            commit('SET_NAME', response.data[0].userName)
+            commit('SET_USER_INFOT', response.data)
+            setToken(response.token)
             resolve()
+          } else {
+            reject(response.msg)
           }
         }).catch(error => {
           reject(error)
@@ -63,10 +72,11 @@ const user = {
         // resolve(arr)
         // 假值============ 默认给权限 admin==============
 
-        getInfo({ roleName: state.token }).then(response => {
-          const data = response.data
+        getInfo({ roleId: state.userInfo[0].roleId }).then(response => {
 
-          commit('SET_ROLES', data.perms.split(','))
+          console.log(response, 'response');
+
+          commit('SET_ROLES', response.data.perms.split(','))
 
           // localStorage.setItem('userId', data.userId)
           // localStorage.setItem('roleName', data.roleName)

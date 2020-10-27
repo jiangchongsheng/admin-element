@@ -4,9 +4,11 @@ var path = require('path');
 var cookieParser = require('cookie-parser');
 var logger = require('morgan');
 
+var jwt = require('jsonwebtoken');//引入token模块
+
 // 引入 routes 文件夹中的路由文件
 var indexRouter = require('./routes/role');
-var usersRouter = require('./routes/users');
+var usersRouter = require('./routes/user');
 
 var app = express();
 
@@ -22,7 +24,7 @@ app.use(express.static(path.join(__dirname, 'public')));
 
 // 设置这些路由的地址
 app.use('/', indexRouter);
-app.use('/users', usersRouter);
+app.use('/user', usersRouter);
 
 // catch 404 and forward to error handler
 app.use(function(req, res, next) {
@@ -31,13 +33,42 @@ app.use(function(req, res, next) {
 
 // error handler
 app.use(function(err, req, res, next) {
-  // set locals, only providing error in development
-  res.locals.message = err.message;
-  res.locals.error = req.app.get('env') === 'development' ? err : {};
+  // // set locals, only providing error in development
+  // res.locals.message = err.message;
+  // res.locals.error = req.app.get('env') === 'development' ? err : {};
 
-  // render the error page
-  res.status(err.status || 500);
-  res.render('error');
+  // // render the error page
+  // res.status(err.status || 500);
+  // res.render('error');
+
+  res.header('Access-Control-Allow-Origin', "*");
+  res.header('Access-Control-Allow-Headers', 'Content-Type,Content-Length,Authorization,Accept,X-Requested-With');
+  res.header('Access-Control-Allow-Methods','PUT,POST,GET,DELETE,OPTIONS');
+  res.header('X-Powered-By', '3.2.1')
+
+  if(req.url!=="/user/login" && req.url !=="/user/register"){
+    // 获取token值
+    const token = req.headers.token;
+    if(token){
+        jwt.verify(token,'signkey',(err,result)=>{
+            if(err){
+                res.send({
+                    code:0,
+                    msg:"没有获取到token值,请登录"
+                })
+            }else{
+                next();
+            }
+        })
+    }else{
+        res.send({
+            code:0,
+            msg:"没有获取到token值,请登录"
+        })
+    }
+}else{
+    next();
+}
 });
 
 module.exports = app;
